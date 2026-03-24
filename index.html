@@ -1,140 +1,659 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MNsure Navigator Services</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-body: #0F1115;
-            --bg-card: #1C1D26;
-            --accent-blue: #3B82F6;
-            --text-main: #FFFFFF;
-            --text-muted: #94A3B8;
-            --border-color: #333645;
-        }
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>MNsure Navigator Services</title>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+ <style>
+ :root {
+ --bg-body: #0F1115;
+ --bg-card: #1C1D26;
+ --bg-input: #272935;
+ --bg-input-hover: #323544;
+ --accent-blue: #3B82F6;
+ --accent-blue-hover: #2563EB;
+ --text-main: #F8FAFC;
+ --text-muted: #94A3B8;
+ --border-color: #333645;
+ }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+ * {
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
+ }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            line-height: 1.6;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 2rem 1rem;
-            min-height: 100vh;
-        }
+ body {
+ font-family: 'Inter', sans-serif;
+ background-color: var(--bg-body);
+ color: var(--text-main);
+ line-height: 1.6;
+ display: flex;
+ justify-content: center;
+ padding: 2rem 1rem;
+ }
 
-        .container {
-            max-width: 800px;
-            width: 100%;
-            background-color: var(--bg-card);
-            border-radius: 24px;
-            padding: 3rem 2rem;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
+ .container {
+ max-width: 900px;
+ width: 100%;
+ background-color: #15161E;
+ border-radius: 20px;
+ padding: 2.5rem;
+ box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+ border: 1px solid rgba(255,255,255,0.05);
+ }
 
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
+ /* --- TOP HEADER --- */
+ .top-meta {
+ display: flex;
+ justify-content: space-between;
+ align-items: flex-start;
+ margin-bottom: 3rem;
+ flex-wrap: wrap;
+ gap: 1rem;
+ }
 
-        .badge {
-            display: inline-block;
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--accent-blue);
-            padding: 0.5rem 1rem;
-            border-radius: 999px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1rem;
-        }
+ .top-meta h2 {
+ font-size: 1.1rem;
+ font-weight: 600;
+ color: var(--text-main);
+ }
 
-        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; }
-        p.subtitle { color: var(--text-muted); font-size: 1.1rem; }
+ .meta-stats {
+ display: flex;
+ gap: 2rem;
+ font-family: 'JetBrains Mono', monospace;
+ font-size: 0.75rem;
+ }
 
-        .services {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 3rem;
-        }
+ .meta-stat {
+ display: flex;
+ flex-direction: column;
+ }
 
-        .service-card {
-            background: rgba(255,255,255,0.03);
-            padding: 1.5rem;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            text-align: center;
-        }
+ .meta-label {
+ color: var(--text-muted);
+ text-transform: uppercase;
+ letter-spacing: 0.5px;
+ margin-bottom: 0.2rem;
+ }
 
-        .service-card h3 { color: var(--accent-blue); margin-bottom: 0.5rem; font-size: 1rem; }
-        .service-card p { font-size: 0.85rem; color: var(--text-muted); }
+ .meta-value {
+ font-weight: 700;
+ color: var(--text-main);
+ }
 
-        .contact-area {
-            background: rgba(255,255,255,0.02);
-            padding: 2.5rem;
-            border-radius: 20px;
-            text-align: center;
-            border: 1px dashed var(--border-color);
-        }
+ /* --- HERO TITLE --- */
+ .hero-title-container {
+ display: flex;
+ align-items: center;
+ gap: 1rem;
+ margin-bottom: 2rem;
+ flex-wrap: wrap;
+ }
 
-        .btn {
-            display: inline-block;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-weight: 700;
-            text-decoration: none;
-            margin: 0.5rem;
-            transition: all 0.2s;
-        }
+ .hero-title {
+ font-size: 1.8rem;
+ font-weight: 700;
+ }
 
-        .btn-primary { background: var(--accent-blue); color: white; }
-        .btn-outline { border: 1px solid var(--border-color); color: white; }
-        
-        .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+ .badge-free {
+ border: 1px solid #10B981;
+ color: #10B981;
+ padding: 0.25rem 0.75rem;
+ border-radius: 999px;
+ font-size: 0.75rem;
+ font-weight: 600;
+ text-transform: uppercase;
+ letter-spacing: 0.5px;
+ background: rgba(16, 185, 129, 0.1);
+ }
 
-        @media (max-width: 600px) {
-            h1 { font-size: 1.8rem; }
-            .container { padding: 1.5rem; }
-        }
-    </style>
+ /* --- SERVICE CARDS --- */
+ .cards-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+ gap: 1.5rem;
+ margin-bottom: 3rem;
+ }
+
+ .service-card {
+ background-color: var(--bg-card);
+ border-radius: 12px;
+ padding: 2rem 1.5rem;
+ text-align: center;
+ border-top: 4px solid var(--accent-blue);
+ box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+ transition: transform 0.2s;
+ }
+
+ .service-card:hover {
+ transform: translateY(-5px);
+ }
+
+ .card-icon {
+ width: 48px;
+ height: 48px;
+ margin: 0 auto 1.5rem;
+ color: var(--accent-blue);
+ }
+
+ .card-title {
+ font-size: 1.1rem;
+ font-weight: 700;
+ margin-bottom: 0.5rem;
+ }
+
+ .card-desc {
+ font-size: 0.85rem;
+ color: var(--text-muted);
+ }
+
+ /* --- CONTACT / FORM SECTION --- */
+ .contact-header {
+ font-size: 1.2rem;
+ font-weight: 700;
+ margin-bottom: 1.5rem;
+ }
+
+ .dashed-divider {
+ border-top: 1px dashed var(--border-color);
+ margin: 0 -2.5rem 2rem;
+ }
+
+ .controls-grid {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 1.5rem;
+ margin-bottom: 2rem;
+ }
+
+ @media (max-width: 768px) {
+ .controls-grid { grid-template-columns: 1fr; }
+ }
+
+ .control-row {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ background: var(--bg-card);
+ padding: 0.75rem 1rem;
+ border-radius: 12px;
+ gap: 1rem;
+ }
+
+ .control-label {
+ font-size: 0.85rem;
+ color: var(--text-muted);
+ white-space: nowrap;
+ }
+
+ /* Toggles (Pills) */
+ .toggle-group {
+ display: flex;
+ background: var(--bg-input);
+ border-radius: 999px;
+ padding: 0.25rem;
+ flex-shrink: 0;
+ }
+
+ .toggle-btn {
+ background: transparent;
+ border: none;
+ color: var(--text-muted);
+ padding: 0.4rem 1rem;
+ border-radius: 999px;
+ font-size: 0.85rem;
+ font-weight: 600;
+ cursor: pointer;
+ transition: all 0.2s;
+ font-family: inherit;
+ }
+
+ .toggle-btn.active {
+ background: var(--accent-blue);
+ color: white;
+ box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+ }
+
+ /* Contact Reveal Buttons */
+ .contact-pill {
+ background: var(--bg-input);
+ border: 1px solid rgba(255,255,255,0.05);
+ color: var(--text-main);
+ padding: 0.75rem 1.5rem;
+ border-radius: 999px;
+ font-size: 0.9rem;
+ font-weight: 500;
+ cursor: pointer;
+ width: 100%;
+ text-align: center;
+ transition: background 0.2s;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ text-decoration: none;
+ }
+ 
+ .contact-pill:hover {
+ background: var(--bg-input-hover);
+ }
+
+ .contact-pill.revealed {
+ background: rgba(59, 130, 246, 0.1);
+ color: var(--accent-blue);
+ border-color: rgba(59, 130, 246, 0.3);
+ }
+
+ /* Slider */
+ .slider-container {
+ display: flex;
+ align-items: center;
+ gap: 1rem;
+ flex-grow: 1;
+ }
+
+ input[type=range] {
+ -webkit-appearance: none;
+ width: 100%;
+ background: transparent;
+ }
+
+ input[type=range]::-webkit-slider-thumb {
+ -webkit-appearance: none;
+ height: 16px;
+ width: 16px;
+ border-radius: 50%;
+ background: #ffffff;
+ cursor: pointer;
+ margin-top: -6px;
+ box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+ }
+
+ input[type=range]::-webkit-slider-runnable-track {
+ width: 100%;
+ height: 4px;
+ cursor: pointer;
+ background: linear-gradient(90deg, var(--accent-blue) var(--slider-percent, 0%), var(--bg-input-hover) var(--slider-percent, 0%));
+ border-radius: 2px;
+ }
+
+ .slider-value {
+ background: var(--bg-input);
+ border: 1px solid var(--border-color);
+ padding: 0.25rem 0.75rem;
+ border-radius: 6px;
+ font-size: 0.85rem;
+ font-weight: 700;
+ min-width: 40px;
+ text-align: center;
+ }
+
+ /* Standard Inputs */
+ .text-inputs-grid {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 1rem;
+ margin-bottom: 2rem;
+ }
+
+ @media (max-width: 600px) {
+ .text-inputs-grid { grid-template-columns: 1fr; }
+ }
+
+ .input-field {
+ width: 100%;
+ background: var(--bg-input);
+ border: 1px solid var(--border-color);
+ color: var(--text-main);
+ padding: 0.85rem 1rem;
+ border-radius: 8px;
+ font-family: inherit;
+ font-size: 0.9rem;
+ transition: border-color 0.2s;
+ }
+
+ .input-field:focus {
+ outline: none;
+ border-color: var(--accent-blue);
+ }
+ 
+ .input-field::placeholder {
+ color: #475569;
+ }
+
+ /* Submit */
+ .submit-btn {
+ width: 100%;
+ background: linear-gradient(180deg, #3B82F6 0%, #2563EB 100%);
+ color: white;
+ border: none;
+ padding: 1rem;
+ border-radius: 12px;
+ font-size: 1rem;
+ font-weight: 600;
+ cursor: pointer;
+ box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+ transition: transform 0.2s, box-shadow 0.2s;
+ }
+
+ .submit-btn:hover {
+ transform: translateY(-2px);
+ box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4);
+ }
+
+ /* --- FOOTER LOGO --- */
+ .footer-section {
+ margin-top: 3rem;
+ padding-top: 2rem;
+ border-top: 1px dashed var(--border-color);
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 1rem;
+ }
+
+ .logo-pill {
+ background-color: #FFFFFF;
+ padding: 0.75rem 1.5rem;
+ border-radius: 12px;
+ display: inline-flex;
+ justify-content: center;
+ align-items: center;
+ box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+ }
+
+ .logo-pill img {
+ height: 35px; /* Adjust this to make logo bigger/smaller */
+ display: block;
+ }
+
+ .footer-text {
+ font-size: 0.8rem;
+ color: var(--text-muted);
+ text-transform: uppercase;
+ letter-spacing: 0.5px;
+ font-weight: 600;
+ }
+
+ /* Hidden inputs for Formspree mapping */
+ .hidden { display: none; }
+ </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <span class="badge">Official Navigator Services</span>
-            <h1>MNsure Help</h1>
-            <p class="subtitle">Free assistance with health insurance applications.</p>
-        </div>
 
-        <div class="services">
-            <div class="service-card">
-                <h3>MinnesotaCare</h3>
-                <p>Low-cost plans for families.</p>
-            </div>
-            <div class="service-card">
-                <h3>Medical Assistance</h3>
-                <p>Minnesota's Medicaid program.</p>
-            </div>
-            <div class="service-card">
-                <h3>Private Plans</h3>
-                <p>Tax credits to lower costs.</p>
-            </div>
-        </div>
+ <div class="container">
+ <!-- Top Meta Section -->
+ <div class="top-meta">
+ <h2 id="t-brand">MNsure Navigator</h2>
+ <div class="meta-stats">
+ <div class="meta-stat">
+ <span class="meta-label" id="t-lbl-status">Status</span>
+ <span class="meta-value" id="t-val-status">Certified & Ready</span>
+ </div>
+ </div>
+ </div>
 
-        <div class="contact-area">
-            <h2 style="margin-bottom: 1rem;">Get in Touch</h2>
-            <a href="sms:+15078587188" class="btn btn-primary">Text: +1 (507) 858-7188</a>
-            <a href="mailto:navigator@minnesotasure.org" class="btn btn-outline">Email Me</a>
-        </div>
-    </div>
+ <!-- Hero Title -->
+ <div class="hero-title-container">
+ <h1 class="hero-title" id="t-main-title">MNsure Certified Navigator</h1>
+ <span class="badge-free" id="t-free-badge">Free of Charge</span>
+ </div>
+
+ <!-- Services Cards -->
+ <div class="cards-grid">
+ <div class="service-card">
+ <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+ <div class="card-title" id="t-card1-title">Apply & Enroll</div>
+ <div class="card-desc" id="t-card1-desc">Get help starting a new application.</div>
+ </div>
+ 
+ <div class="service-card">
+ <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+ <div class="card-title" id="t-card2-title">Renew Coverage</div>
+ <div class="card-desc" id="t-card2-desc">Keep your current health plan active.</div>
+ </div>
+
+ <div class="service-card">
+ <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+ <div class="card-title" id="t-card3-title">Report Changes</div>
+ <div class="card-desc" id="t-card3-desc">Update income, address, or household.</div>
+ </div>
+ </div>
+
+ <!-- Form / Contact Section -->
+ <h3 class="contact-header" id="t-contact-header">Contact Information & Optional Intake</h3>
+ <div class="dashed-divider"></div>
+
+ <form action="https://formspree.io/f/xnjgegbe" method="POST">
+ 
+ <div class="controls-grid">
+ <!-- Language Toggle with 3-letter symbols -->
+ <div class="control-row">
+ <span class="control-label">Language / Мова</span>
+ <div class="toggle-group">
+ <button type="button" class="toggle-btn active" onclick="setLang('eng')" id="btn-lang-eng">eng</button>
+ <button type="button" class="toggle-btn" onclick="setLang('esp')" id="btn-lang-esp">esp</button>
+ <button type="button" class="toggle-btn" onclick="setLang('ukr')" id="btn-lang-ukr">ukr</button>
+ </div>
+ </div>
+ 
+ <!-- Phone Reveal -->
+ <button type="button" class="contact-pill" id="btn-phone" onclick="revealPhone()">
+ <span id="txt-phone">Click to Reveal Phone</span>
+ </button>
+
+ <!-- Email Reveal -->
+ <button type="button" class="contact-pill" id="btn-email" onclick="revealEmail()">
+ <span id="txt-email">Click to Reveal Email</span>
+ </button>
+ 
+ <!-- MNsure Account Toggle -->
+ <div class="control-row">
+ <span class="control-label" id="t-lbl-account">MNsure Account?</span>
+ <div class="toggle-group">
+ <button type="button" class="toggle-btn" onclick="setToggle('account', 'yes')" id="btn-acc-yes">Yes</button>
+ <button type="button" class="toggle-btn" onclick="setToggle('account', 'no')" id="btn-acc-no">No</button>
+ </div>
+ <input type="hidden" name="Has_MNsure_Account" id="input-account" value="">
+ </div>
+
+ <!-- Slider -->
+ <div class="control-row" style="grid-column: 1 / -1;">
+ <span class="control-label" id="t-lbl-household">Household Size</span>
+ <div class="slider-container">
+ <input type="range" min="1" max="10" value="1" name="Household_Size" id="household-slider" oninput="updateSlider(this.value)">
+ </div>
+ <span class="slider-value" id="household-val">1</span>
+ </div>
+
+ <!-- Needs / Medicare (Updated question text) -->
+ <div class="control-row">
+ <span class="control-label" id="t-lbl-medicare">Do you have Medicare/65+</span>
+ <div class="toggle-group">
+ <button type="button" class="toggle-btn" onclick="setToggle('medicare', 'yes')" id="btn-med-yes">Yes</button>
+ <button type="button" class="toggle-btn" onclick="setToggle('medicare', 'no')" id="btn-med-no">No</button>
+ </div>
+ <input type="hidden" name="Has_Medicare" id="input-medicare" value="">
+ </div>
+
+ <!-- Pending Case Toggle -->
+ <div class="control-row">
+ <span class="control-label" id="t-lbl-pending">Pending Case?</span>
+ <div class="toggle-group">
+ <button type="button" class="toggle-btn" onclick="setToggle('pending', 'yes')" id="btn-pen-yes">Yes</button>
+ <button type="button" class="toggle-btn" onclick="setToggle('pending', 'no')" id="btn-pen-no">No</button>
+ </div>
+ <input type="hidden" name="Has_Pending_Case" id="input-pending" value="">
+ </div>
+ </div>
+
+ <!-- Standard Inputs -->
+ <div class="text-inputs-grid">
+ <input type="text" name="Full_Name" class="input-field" placeholder="Full Name" id="i-name">
+ <input type="text" name="Phone_Number" class="input-field" placeholder="Phone Number" id="i-phone">
+ <input type="email" name="Email_Address" class="input-field" placeholder="Email Address" id="i-email">
+ <input type="text" name="Date_Of_Birth" class="input-field" placeholder="Date of Birth (MM/DD/YYYY)" id="i-dob">
+ <input type="text" name="Address" class="input-field" placeholder="Home Address" style="grid-column: 1 / -1;" id="i-address">
+ </div>
+
+ <button type="submit" class="submit-btn" id="t-submit">Submit Request</button>
+ </form>
+
+ <!-- Custom Inline Vector Logo -->
+ <div class="footer-section">
+ <svg width="220" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+ <!-- Abstract Minnesota Squares Logo -->
+ <rect x="22" y="8" width="5" height="5" rx="1" fill="#74B4B9" opacity="0.9" />
+ <rect x="12" y="15" width="9" height="9" rx="1.5" fill="#84A57A" opacity="0.9" />
+ <rect x="23" y="17" width="8" height="8" rx="1.5" fill="#74B4B9" opacity="0.8" />
+ <rect x="33" y="16" width="6" height="6" rx="1" fill="#75A666" opacity="0.9" />
+ <rect x="13" y="26" width="10" height="10" rx="2" fill="#C46244" opacity="0.9" />
+ <rect x="25" y="27" width="8" height="8" rx="1.5" fill="#E28929" opacity="0.9" />
+ <rect x="18" y="38" width="12" height="12" rx="2" fill="#74B4B9" opacity="0.9" />
+ <rect x="12" y="44" width="5" height="5" rx="1" fill="#E28929" opacity="0.9" />
+ <rect x="32" y="44" width="7" height="7" rx="1.5" fill="#B3C458" opacity="0.9" />
+
+ <!-- MNsure Text -->
+ <text x="48" y="46" font-family="'Inter', sans-serif" font-weight="700" font-size="34" fill="#F59E0B">MN<tspan fill="#4DA1A9" font-weight="400">sure</tspan></text>
+ </svg>
+ <span class="footer-text" id="t-footer-text">Official Certified Assister</span>
+ </div>
+
+ </div>
+
+ <script>
+ // Initialize slider gradient
+ updateSlider(1);
+
+ function updateSlider(val) {
+ document.getElementById('household-val').innerText = val;
+ const percentage = ((val - 1) / 9) * 100;
+ document.getElementById('household-slider').style.setProperty('--slider-percent', percentage + '%');
+ }
+
+ // Toggle Buttons Logic
+ function setToggle(group, value) {
+ // Update UI buttons
+ document.getElementById(`btn-${group.substring(0,3)}-yes`).classList.remove('active');
+ document.getElementById(`btn-${group.substring(0,3)}-no`).classList.remove('active');
+ document.getElementById(`btn-${group.substring(0,3)}-${value}`).classList.add('active');
+ 
+ // Update hidden input for form submission
+ document.getElementById(`input-${group}`).value = value;
+ }
+
+ // Reveal Contact Logic
+ function revealPhone() {
+ const btn = document.getElementById('btn-phone');
+ btn.classList.add('revealed');
+ btn.innerHTML = `<a href="sms:+15078587188" style="color:inherit; text-decoration:none; font-weight:700;">+1 (507) 858-7188</a>`;
+ }
+
+ function revealEmail() {
+ const btn = document.getElementById('btn-email');
+ btn.classList.add('revealed');
+ btn.innerHTML = `<a href="mailto:navigator@minnesotasure.org" style="color:inherit; text-decoration:none; font-weight:700;">navigator@minnesotasure.org</a>`;
+ }
+
+ // Translation Logic
+ const trans = {
+ eng: {
+ brand: "MNsure Navigator",
+ lblStatus: "Status", valStatus: "Certified & Ready",
+ mainTitle: "MNsure Certified Navigator", freeBadge: "Free of Charge",
+ c1Title: "Apply & Enroll", c1Desc: "Get help starting a new application.",
+ c2Title: "Renew Coverage", c2Desc: "Keep your current health plan active.",
+ c3Title: "Report Changes", c3Desc: "Update income, address, or household.",
+ contactHeader: "Contact Information & Optional Intake",
+ lblAccount: "MNsure Account?", lblHousehold: "Household Size",
+ lblMedicare: "Do you have Medicare/65+", lblPending: "Pending Case?",
+ btnYes: "Yes", btnNo: "No",
+ phName: "Full Name", phPhone: "Phone Number", phEmail: "Email Address", phDob: "Date of Birth (MM/DD/YYYY)", phAddress: "Home Address",
+ submit: "Submit Request", revealPhone: "Click to Reveal Phone", revealEmail: "Click to Reveal Email", footerText: "Official Certified Assister"
+ },
+ esp: {
+ brand: "Navegador de MNsure",
+ lblStatus: "Estado", valStatus: "Certificado y Listo",
+ mainTitle: "Navegador Certificado de MNsure", freeBadge: "Sin Costo",
+ c1Title: "Aplicar e Inscribirse", c1Desc: "Obtenga ayuda para iniciar una nueva aplicación.",
+ c2Title: "Renovar Cobertura", c2Desc: "Mantenga activo su plan de salud actual.",
+ c3Title: "Reportar Cambios", c3Desc: "Actualice ingresos, dirección o su hogar.",
+ contactHeader: "Información de Contacto",
+ lblAccount: "¿Cuenta MNsure?", lblHousehold: "Tamaño del Hogar",
+ lblMedicare: "¿Tiene Medicare/65+", lblPending: "¿Caso Pendiente?",
+ btnYes: "Sí", btnNo: "No",
+ phName: "Nombre Completo", phPhone: "Número de Teléfono", phEmail: "Correo Electrónico", phDob: "Fecha de Nacimiento", phAddress: "Dirección",
+ submit: "Enviar Solicitud", revealPhone: "Clic para revelar teléfono", revealEmail: "Clic para revelar email", footerText: "Asistente Oficial Certificado"
+ },
+ ukr: {
+ brand: "Навігатор MNsure",
+ lblStatus: "Статус", valStatus: "Сертифікований",
+ mainTitle: "Сертифікований навігатор MNsure", freeBadge: "Безкоштовно",
+ c1Title: "Подати заявку", c1Desc: "Допомога з новою заявкою на страхування.",
+ c2Title: "Поновити покриття", c2Desc: "Збережіть свій поточний план активним.",
+ c3Title: "Повідомити про зміни", c3Desc: "Оновіть дохід, адресу або склад сім'ї.",
+ contactHeader: "Контактна інформація",
+ lblAccount: "Акаунт MNsure?", lblHousehold: "Склад сім'ї",
+ lblMedicare: "У вас є Medicare/65+", lblPending: "Справа на розгляді?",
+ btnYes: "Так", btnNo: "Ні",
+ phName: "Повне ім'я", phPhone: "Номер телефону", phEmail: "Електронна пошта", phDob: "Дата народження", phAddress: "Домашня адреса",
+ submit: "Надіслати запит", revealPhone: "Натисніть, щоб побачити телефон", revealEmail: "Натисніть, щоб побачити Email", footerText: "Офіційний сертифікований помічник"
+ }
+ };
+
+ function setLang(lang) {
+ // Update toggle UI
+ document.getElementById('btn-lang-eng').classList.remove('active');
+ document.getElementById('btn-lang-esp').classList.remove('active');
+ document.getElementById('btn-lang-ukr').classList.remove('active');
+ document.getElementById(`btn-lang-${lang}`).classList.add('active');
+
+ // Apply translations
+ const t = trans[lang];
+ document.getElementById('t-brand').innerText = t.brand;
+ document.getElementById('t-lbl-status').innerText = t.lblStatus;
+ document.getElementById('t-val-status').innerText = t.valStatus;
+ document.getElementById('t-main-title').innerText = t.mainTitle;
+ document.getElementById('t-free-badge').innerText = t.freeBadge;
+ 
+ document.getElementById('t-card1-title').innerText = t.c1Title;
+ document.getElementById('t-card1-desc').innerText = t.c1Desc;
+ document.getElementById('t-card2-title').innerText = t.c2Title;
+ document.getElementById('t-card2-desc').innerText = t.c2Desc;
+ document.getElementById('t-card3-title').innerText = t.c3Title;
+ document.getElementById('t-card3-desc').innerText = t.c3Desc;
+ 
+ document.getElementById('t-contact-header').innerText = t.contactHeader;
+ document.getElementById('t-lbl-account').innerText = t.lblAccount;
+ document.getElementById('t-lbl-household').innerText = t.lblHousehold;
+ document.getElementById('t-lbl-medicare').innerText = t.lblMedicare;
+ document.getElementById('t-lbl-pending').innerText = t.lblPending;
+
+ document.getElementById('btn-acc-yes').innerText = t.btnYes;
+ document.getElementById('btn-acc-no').innerText = t.btnNo;
+ document.getElementById('btn-med-yes').innerText = t.btnYes;
+ document.getElementById('btn-med-no').innerText = t.btnNo;
+ document.getElementById('btn-pen-yes').innerText = t.btnYes;
+ document.getElementById('btn-pen-no').innerText = t.btnNo;
+
+ document.getElementById('i-name').placeholder = t.phName;
+ document.getElementById('i-phone').placeholder = t.phPhone;
+ document.getElementById('i-email').placeholder = t.phEmail;
+ document.getElementById('i-dob').placeholder = t.phDob;
+ document.getElementById('i-address').placeholder = t.phAddress;
+ document.getElementById('t-submit').innerText = t.submit;
+ document.getElementById('t-footer-text').innerText = t.footerText;
+
+ // Only update reveal buttons if they haven't been clicked
+ if(!document.getElementById('btn-phone').classList.contains('revealed')) {
+ document.getElementById('txt-phone').innerText = t.revealPhone;
+ }
+ if(!document.getElementById('btn-email').classList.contains('revealed')) {
+ document.getElementById('txt-email').innerText = t.revealEmail;
+ }
+ }
+ </script>
 </body>
 </html>
