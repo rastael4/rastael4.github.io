@@ -4,25 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MNsure Navigator Services</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-body: #0F1115;
             --bg-card: #1C1D26;
-            --bg-input: #272935;
-            --bg-input-hover: #323544;
             --accent-blue: #3B82F6;
-            --accent-blue-hover: #2563EB;
-            --text-main: #F8FAFC;
+            --text-main: #FFFFFF;
             --text-muted: #94A3B8;
             --border-color: #333645;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -31,88 +24,66 @@
             line-height: 1.6;
             display: flex;
             justify-content: center;
+            align-items: flex-start;
             padding: 2rem 1rem;
             min-height: 100vh;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 800px;
             width: 100%;
-            background-color: #15161E;
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255,255,255,0.05);
+            background-color: var(--bg-card);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
-        .top-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+        .header {
+            text-align: center;
             margin-bottom: 3rem;
-            flex-wrap: wrap;
-            gap: 1rem;
         }
 
-        .hero-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(to right, #fff, #94A3B8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .badge-free {
+        .badge {
             display: inline-block;
-            background: rgba(16, 185, 129, 0.1);
-            color: #10B981;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-blue);
             padding: 0.5rem 1rem;
             border-radius: 999px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
 
-        .grid {
+        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; }
+        p.subtitle { color: var(--text-muted); font-size: 1.1rem; }
+
+        .services {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
             margin-bottom: 3rem;
         }
 
-        .card {
-            background: var(--bg-card);
-            padding: 2rem;
+        .service-card {
+            background: rgba(255,255,255,0.03);
+            padding: 1.5rem;
             border-radius: 16px;
             border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: var(--accent-blue);
-            transform: translateY(-5px);
-        }
-
-        .card h3 {
-            color: var(--accent-blue);
-            margin-bottom: 0.5rem;
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .contact-box {
-            background: linear-gradient(145deg, #1C1D26, #15161E);
-            padding: 3rem;
-            border-radius: 24px;
             text-align: center;
-            border: 1px solid var(--border-color);
+        }
+
+        .service-card h3 { color: var(--accent-blue); margin-bottom: 0.5rem; font-size: 1rem; }
+        .service-card p { font-size: 0.85rem; color: var(--text-muted); }
+
+        .contact-area {
+            background: rgba(255,255,255,0.02);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px dashed var(--border-color);
         }
 
         .btn {
@@ -121,65 +92,48 @@
             border-radius: 12px;
             font-weight: 700;
             text-decoration: none;
-            transition: all 0.2s;
             margin: 0.5rem;
-            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .btn-primary {
-            background: var(--accent-blue);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-blue-hover);
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
-        }
-
-        .btn-outline {
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-        }
-
-        .btn-outline:hover {
-            background: var(--bg-input);
-        }
+        .btn-primary { background: var(--accent-blue); color: white; }
+        .btn-outline { border: 1px solid var(--border-color); color: white; }
+        
+        .btn:hover { transform: translateY(-2px); opacity: 0.9; }
 
         @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
             .container { padding: 1.5rem; }
-            .hero-title { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="top-meta">
-            <div>
-                <span class="badge-free">Certified Navigator Services</span>
-                <h1 class="hero-title">MNsure Help</h1>
-            </div>
+        <div class="header">
+            <span class="badge">Official Navigator Services</span>
+            <h1>MNsure Help</h1>
+            <p class="subtitle">Free assistance with health insurance applications.</p>
         </div>
 
-        <div class="grid">
-            <div class="card">
+        <div class="services">
+            <div class="service-card">
                 <h3>MinnesotaCare</h3>
-                <p>Lower-cost health insurance for Minnesotans who don't have access to employer-sponsored coverage.</p>
+                <p>Low-cost plans for families.</p>
             </div>
-            <div class="card">
+            <div class="service-card">
                 <h3>Medical Assistance</h3>
-                <p>Minnesota's Medicaid program for people with low income.</p>
+                <p>Minnesota's Medicaid program.</p>
             </div>
-            <div class="card">
-                <h3>Qualified Plans</h3>
-                <p>Private insurance plans with tax credits to lower your monthly premium.</p>
+            <div class="service-card">
+                <h3>Private Plans</h3>
+                <p>Tax credits to lower costs.</p>
             </div>
         </div>
 
-        <div class="contact-box">
-            <h2 style="margin-bottom: 1.5rem;">Get in Touch</h2>
-            <p style="color: var(--text-muted); margin-bottom: 2rem;">Professional assistance at no cost to you.</p>
+        <div class="contact-area">
+            <h2 style="margin-bottom: 1rem;">Get in Touch</h2>
             <a href="sms:+15078587188" class="btn btn-primary">Text: +1 (507) 858-7188</a>
-            <a href="mailto:navigator@minnesotasure.org" class="btn btn-outline">Email Specialist</a>
+            <a href="mailto:navigator@minnesotasure.org" class="btn btn-outline">Email Me</a>
         </div>
     </div>
 </body>
