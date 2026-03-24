@@ -7,7 +7,9 @@
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
  <style>
  :root {
+ /* Default Dark Theme Variables */
  --bg-body: #0F1115;
+ --bg-container: #15161E;
  --bg-card: #1C1D26;
  --bg-input: #272935;
  --bg-input-hover: #323544;
@@ -16,6 +18,24 @@
  --text-main: #F8FAFC;
  --text-muted: #94A3B8;
  --border-color: #333645;
+ --container-border: rgba(255,255,255,0.05);
+ --container-shadow: rgba(0, 0, 0, 0.5);
+ }
+
+ /* Light Theme Variables */
+ body.light-theme {
+ --bg-body: #F1F5F9;
+ --bg-container: #FFFFFF;
+ --bg-card: #FFFFFF;
+ --bg-input: #F8FAFC;
+ --bg-input-hover: #E2E8F0;
+ --accent-blue: #2563EB;
+ --accent-blue-hover: #1D4ED8;
+ --text-main: #0F172A;
+ --text-muted: #64748B;
+ --border-color: #E2E8F0;
+ --container-border: rgba(0,0,0,0.1);
+ --container-shadow: rgba(0, 0, 0, 0.05);
  }
 
  * {
@@ -32,16 +52,18 @@
  display: flex;
  justify-content: center;
  padding: 2rem 1rem;
+ transition: background-color 0.3s, color 0.3s;
  }
 
  .container {
  max-width: 900px;
  width: 100%;
- background-color: #15161E;
+ background-color: var(--bg-container);
  border-radius: 20px;
  padding: 2.5rem;
- box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
- border: 1px solid rgba(255,255,255,0.05);
+ box-shadow: 0 25px 50px -12px var(--container-shadow);
+ border: 1px solid var(--container-border);
+ transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
  }
 
  /* --- TOP HEADER --- */
@@ -58,6 +80,12 @@
  font-size: 1.1rem;
  font-weight: 600;
  color: var(--text-main);
+ }
+
+ .meta-right {
+ display: flex;
+ gap: 1.5rem;
+ align-items: center;
  }
 
  .meta-stats {
@@ -82,6 +110,26 @@
  .meta-value {
  font-weight: 700;
  color: var(--text-main);
+ }
+
+ .theme-toggle {
+ background: var(--bg-input);
+ border: 1px solid var(--border-color);
+ color: var(--text-main);
+ width: 40px;
+ height: 40px;
+ border-radius: 50%;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ cursor: pointer;
+ font-size: 1.2rem;
+ transition: all 0.2s;
+ }
+
+ .theme-toggle:hover {
+ background: var(--bg-input-hover);
+ transform: scale(1.05);
  }
 
  /* --- HERO TITLE --- */
@@ -124,8 +172,11 @@
  padding: 2rem 1.5rem;
  text-align: center;
  border-top: 4px solid var(--accent-blue);
- box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
- transition: transform 0.2s;
+ box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+ transition: transform 0.2s, background-color 0.3s;
+ border-left: 1px solid var(--border-color);
+ border-right: 1px solid var(--border-color);
+ border-bottom: 1px solid var(--border-color);
  }
 
  .service-card:hover {
@@ -160,6 +211,7 @@
  .dashed-divider {
  border-top: 1px dashed var(--border-color);
  margin: 0 -2.5rem 2rem;
+ transition: border-color 0.3s;
  }
 
  .controls-grid {
@@ -181,12 +233,13 @@
  padding: 0.75rem 1rem;
  border-radius: 12px;
  gap: 1rem;
+ border: 1px solid var(--border-color);
+ transition: background-color 0.3s, border-color 0.3s;
  }
 
  .control-label {
  font-size: 0.85rem;
  color: var(--text-muted);
- white-space: nowrap;
  }
 
  /* Toggles (Pills) */
@@ -196,6 +249,7 @@
  border-radius: 999px;
  padding: 0.25rem;
  flex-shrink: 0;
+ transition: background-color 0.3s;
  }
 
  .toggle-btn {
@@ -220,20 +274,22 @@
  /* Contact Reveal Buttons */
  .contact-pill {
  background: var(--bg-input);
- border: 1px solid rgba(255,255,255,0.05);
+ border: 1px solid var(--border-color);
  color: var(--text-main);
  padding: 0.75rem 1.5rem;
- border-radius: 999px;
+ border-radius: 12px;
  font-size: 0.9rem;
  font-weight: 500;
  cursor: pointer;
  width: 100%;
  text-align: center;
- transition: background 0.2s;
+ transition: all 0.2s;
  display: flex;
+ flex-direction: column;
  justify-content: center;
  align-items: center;
  text-decoration: none;
+ min-height: 52px;
  }
  
  .contact-pill:hover {
@@ -241,9 +297,16 @@
  }
 
  .contact-pill.revealed {
- background: rgba(59, 130, 246, 0.1);
+ background: rgba(59, 130, 246, 0.05);
  color: var(--accent-blue);
  border-color: rgba(59, 130, 246, 0.3);
+ padding: 1rem;
+ line-height: 1.4;
+ cursor: default;
+ }
+
+ .contact-pill.revealed:hover {
+ background: rgba(59, 130, 246, 0.08);
  }
 
  /* Slider */
@@ -262,20 +325,21 @@
 
  input[type=range]::-webkit-slider-thumb {
  -webkit-appearance: none;
- height: 16px;
- width: 16px;
+ height: 18px;
+ width: 18px;
  border-radius: 50%;
- background: #ffffff;
+ background: var(--accent-blue);
  cursor: pointer;
- margin-top: -6px;
- box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+ margin-top: -7px;
+ box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+ border: 2px solid white;
  }
 
  input[type=range]::-webkit-slider-runnable-track {
  width: 100%;
  height: 4px;
  cursor: pointer;
- background: linear-gradient(90deg, var(--accent-blue) var(--slider-percent, 0%), var(--bg-input-hover) var(--slider-percent, 0%));
+ background: linear-gradient(90deg, var(--accent-blue) var(--slider-percent, 0%), var(--border-color) var(--slider-percent, 0%));
  border-radius: 2px;
  }
 
@@ -288,6 +352,7 @@
  font-weight: 700;
  min-width: 40px;
  text-align: center;
+ transition: all 0.3s;
  }
 
  /* Standard Inputs */
@@ -311,16 +376,18 @@
  border-radius: 8px;
  font-family: inherit;
  font-size: 0.9rem;
- transition: border-color 0.2s;
+ transition: border-color 0.2s, background-color 0.3s, color 0.3s;
  }
 
  .input-field:focus {
  outline: none;
  border-color: var(--accent-blue);
+ background: var(--bg-card);
  }
  
  .input-field::placeholder {
- color: #475569;
+ color: var(--text-muted);
+ opacity: 0.7;
  }
 
  /* Submit */
@@ -352,6 +419,7 @@
  flex-direction: column;
  align-items: center;
  gap: 1rem;
+ transition: border-color 0.3s;
  }
 
  .logo-pill {
@@ -361,11 +429,12 @@
  display: inline-flex;
  justify-content: center;
  align-items: center;
- box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+ box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+ border: 1px solid #E2E8F0;
  }
 
  .logo-pill img {
- height: 35px; /* Adjust this to make logo bigger/smaller */
+ height: 35px;
  display: block;
  }
 
@@ -384,14 +453,20 @@
 <body>
 
  <div class="container">
- <!-- Top Meta Section -->
+ <!-- Top Meta Section & Theme Toggle -->
  <div class="top-meta">
  <h2 id="t-brand">MNsure Navigator</h2>
+ <div class="meta-right">
  <div class="meta-stats">
  <div class="meta-stat">
  <span class="meta-label" id="t-lbl-status">Status</span>
  <span class="meta-value" id="t-val-status">Certified & Ready</span>
  </div>
+ </div>
+ <!-- Light/Dark Toggle -->
+ <button type="button" class="theme-toggle" onclick="toggleTheme()" id="theme-btn" aria-label="Toggle Theme">
+ ☀️
+ </button>
  </div>
  </div>
 
@@ -429,7 +504,7 @@
  <form action="https://formspree.io/f/xnjgegbe" method="POST">
  
  <div class="controls-grid">
- <!-- Language Toggle with 3-letter symbols -->
+ <!-- Language Toggle -->
  <div class="control-row">
  <span class="control-label">Language / Мова</span>
  <div class="toggle-group">
@@ -459,16 +534,16 @@
  <input type="hidden" name="Has_MNsure_Account" id="input-account" value="">
  </div>
 
- <!-- Slider -->
+ <!-- Slider (Updated to 15) -->
  <div class="control-row" style="grid-column: 1 / -1;">
  <span class="control-label" id="t-lbl-household">Household Size</span>
  <div class="slider-container">
- <input type="range" min="1" max="10" value="1" name="Household_Size" id="household-slider" oninput="updateSlider(this.value)">
+ <input type="range" min="1" max="15" value="1" name="Household_Size" id="household-slider" oninput="updateSlider(this.value)">
  </div>
  <span class="slider-value" id="household-val">1</span>
  </div>
 
- <!-- Needs / Medicare (Updated question text) -->
+ <!-- Medicare Toggle -->
  <div class="control-row">
  <span class="control-label" id="t-lbl-medicare">Do you have Medicare/65+</span>
  <div class="toggle-group">
@@ -478,9 +553,9 @@
  <input type="hidden" name="Has_Medicare" id="input-medicare" value="">
  </div>
 
- <!-- Pending Case Toggle -->
+ <!-- Pending Case Toggle (Updated text) -->
  <div class="control-row">
- <span class="control-label" id="t-lbl-pending">Pending Case?</span>
+ <span class="control-label" id="t-lbl-pending">Pending MNsure Case?</span>
  <div class="toggle-group">
  <button type="button" class="toggle-btn" onclick="setToggle('pending', 'yes')" id="btn-pen-yes">Yes</button>
  <button type="button" class="toggle-btn" onclick="setToggle('pending', 'no')" id="btn-pen-no">No</button>
@@ -503,6 +578,7 @@
 
  <!-- Custom Inline Vector Logo -->
  <div class="footer-section">
+ <div class="logo-pill">
  <svg width="220" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
  <!-- Abstract Minnesota Squares Logo -->
  <rect x="22" y="8" width="5" height="5" rx="1" fill="#74B4B9" opacity="0.9" />
@@ -514,33 +590,38 @@
  <rect x="18" y="38" width="12" height="12" rx="2" fill="#74B4B9" opacity="0.9" />
  <rect x="12" y="44" width="5" height="5" rx="1" fill="#E28929" opacity="0.9" />
  <rect x="32" y="44" width="7" height="7" rx="1.5" fill="#B3C458" opacity="0.9" />
-
  <!-- MNsure Text -->
  <text x="48" y="46" font-family="'Inter', sans-serif" font-weight="700" font-size="34" fill="#F59E0B">MN<tspan fill="#4DA1A9" font-weight="400">sure</tspan></text>
  </svg>
+ </div>
  <span class="footer-text" id="t-footer-text">Official Certified Assister</span>
  </div>
 
  </div>
 
  <script>
- // Initialize slider gradient
- updateSlider(1);
+ let currentLang = 'eng';
 
+ // Theme Toggle Logic
+ function toggleTheme() {
+ document.body.classList.toggle('light-theme');
+ const isLight = document.body.classList.contains('light-theme');
+ document.getElementById('theme-btn').innerText = isLight ? '🌙' : '☀️';
+ }
+
+ // Initialize slider gradient (Max 15)
+ updateSlider(1);
  function updateSlider(val) {
  document.getElementById('household-val').innerText = val;
- const percentage = ((val - 1) / 9) * 100;
+ const percentage = ((val - 1) / 14) * 100;
  document.getElementById('household-slider').style.setProperty('--slider-percent', percentage + '%');
  }
 
  // Toggle Buttons Logic
  function setToggle(group, value) {
- // Update UI buttons
  document.getElementById(`btn-${group.substring(0,3)}-yes`).classList.remove('active');
  document.getElementById(`btn-${group.substring(0,3)}-no`).classList.remove('active');
  document.getElementById(`btn-${group.substring(0,3)}-${value}`).classList.add('active');
- 
- // Update hidden input for form submission
  document.getElementById(`input-${group}`).value = value;
  }
 
@@ -548,16 +629,16 @@
  function revealPhone() {
  const btn = document.getElementById('btn-phone');
  btn.classList.add('revealed');
- btn.innerHTML = `<a href="sms:+15078587188" style="color:inherit; text-decoration:none; font-weight:700;">+1 (507) 858-7188</a>`;
+ btn.innerHTML = trans[currentLang].revealedPhoneContent;
  }
 
  function revealEmail() {
  const btn = document.getElementById('btn-email');
  btn.classList.add('revealed');
- btn.innerHTML = `<a href="mailto:navigator@minnesotasure.org" style="color:inherit; text-decoration:none; font-weight:700;">navigator@minnesotasure.org</a>`;
+ btn.innerHTML = trans[currentLang].revealedEmailContent;
  }
 
- // Translation Logic
+ // Translation Logic (Includes detailed contact notes)
  const trans = {
  eng: {
  brand: "MNsure Navigator",
@@ -568,10 +649,12 @@
  c3Title: "Report Changes", c3Desc: "Update income, address, or household.",
  contactHeader: "Contact Information & Optional Intake",
  lblAccount: "MNsure Account?", lblHousehold: "Household Size",
- lblMedicare: "Do you have Medicare/65+", lblPending: "Pending Case?",
+ lblMedicare: "Do you have Medicare/65+", lblPending: "Pending MNsure Case?",
  btnYes: "Yes", btnNo: "No",
  phName: "Full Name", phPhone: "Phone Number", phEmail: "Email Address", phDob: "Date of Birth (MM/DD/YYYY)", phAddress: "Home Address",
- submit: "Submit Request", revealPhone: "Click to Reveal Phone", revealEmail: "Click to Reveal Email", footerText: "Official Certified Assister"
+ submit: "Submit Request", revealPhone: "Click to Reveal Phone", revealEmail: "Click to Reveal Email", footerText: "Official Certified Assister",
+ revealedPhoneContent: "<a href='sms:+15078587188' style='color:inherit; text-decoration:none; font-weight:700; font-size: 1.1rem;'>+1 (507) 858-7188</a><span style='font-size: 0.85rem; font-weight: 500; margin-top: 0.5rem; display: block;'>(Please text us instead of calling)</span><span style='font-size: 0.8rem; font-weight: 400; color: var(--text-muted); display: block; margin-top: 0.25rem;'>We speak English, Ukrainian, and Spanish</span>",
+ revealedEmailContent: "<a href='mailto:navigator@minnesotasure.org' style='color:inherit; text-decoration:none; font-weight:700; font-size: 1.1rem;'>navigator@minnesotasure.org</a><span style='font-size: 0.8rem; font-weight: 400; color: var(--text-muted); display: block; margin-top: 0.5rem;'>We speak English, Ukrainian, and Spanish</span>"
  },
  esp: {
  brand: "Navegador de MNsure",
@@ -582,10 +665,12 @@
  c3Title: "Reportar Cambios", c3Desc: "Actualice ingresos, dirección o su hogar.",
  contactHeader: "Información de Contacto",
  lblAccount: "¿Cuenta MNsure?", lblHousehold: "Tamaño del Hogar",
- lblMedicare: "¿Tiene Medicare/65+", lblPending: "¿Caso Pendiente?",
+ lblMedicare: "¿Tiene Medicare/65+", lblPending: "¿Caso MNsure Pendiente?",
  btnYes: "Sí", btnNo: "No",
  phName: "Nombre Completo", phPhone: "Número de Teléfono", phEmail: "Correo Electrónico", phDob: "Fecha de Nacimiento", phAddress: "Dirección",
- submit: "Enviar Solicitud", revealPhone: "Clic para revelar teléfono", revealEmail: "Clic para revelar email", footerText: "Asistente Oficial Certificado"
+ submit: "Enviar Solicitud", revealPhone: "Clic para revelar teléfono", revealEmail: "Clic para revelar email", footerText: "Asistente Oficial Certificado",
+ revealedPhoneContent: "<a href='sms:+15078587188' style='color:inherit; text-decoration:none; font-weight:700; font-size: 1.1rem;'>+1 (507) 858-7188</a><span style='font-size: 0.85rem; font-weight: 500; margin-top: 0.5rem; display: block;'>(Por favor, envíenos un texto en lugar de llamar)</span><span style='font-size: 0.8rem; font-weight: 400; color: var(--text-muted); display: block; margin-top: 0.25rem;'>Hablamos Inglés, Ucraniano y Español</span>",
+ revealedEmailContent: "<a href='mailto:navigator@minnesotasure.org' style='color:inherit; text-decoration:none; font-weight:700; font-size: 1.1rem;'>navigator@minnesotasure.org</a><span style='font-size: 0.8rem; font-weight: 400; color: var(--text-muted); display: block; margin-top: 0.5rem;'>Hablamos Inglés, Ucraniano y Español</span>"
  },
  ukr: {
  brand: "Навігатор MNsure",
@@ -596,21 +681,25 @@
  c3Title: "Повідомити про зміни", c3Desc: "Оновіть дохід, адресу або склад сім'ї.",
  contactHeader: "Контактна інформація",
  lblAccount: "Акаунт MNsure?", lblHousehold: "Склад сім'ї",
- lblMedicare: "У вас є Medicare/65+", lblPending: "Справа на розгляді?",
+ lblMedicare: "У вас є Medicare/65+", lblPending: "Справа MNsure на розгляді?",
  btnYes: "Так", btnNo: "Ні",
  phName: "Повне ім'я", phPhone: "Номер телефону", phEmail: "Електронна пошта", phDob: "Дата народження", phAddress: "Домашня адреса",
- submit: "Надіслати запит", revealPhone: "Натисніть, щоб побачити телефон", revealEmail: "Натисніть, щоб побачити Email", footerText: "Офіційний сертифікований помічник"
+ submit: "Надіслати запит", revealPhone: "Натисніть, щоб побачити телефон", revealEmail: "Натисніть, щоб побачити Email", footerText: "Офіційний сертифікований помічник",
+ revealedPhoneContent: "<a href='sms:+15078587188' style='color:inherit; text-decoration:none; font-weight:700; font-size: 1.1rem;'>+1 (507) 858-7188</a><span style='font-size: 0.85rem; font-weight: 500; margin-top: 0.5rem; display: block;'>(Будь ласка, пишіть нам замість дзвінків)</span><span style='font-size: 0.8rem; font-weight: 400; color: var(--text-muted); display: block; margin-top: 0.25rem;'>Ми розмовляємо англійською, українською та іспанською</span>",
+ revealedEmailContent: "<a href='mailto:navigator@minnesotasure.org' style='color:inherit; text-decoration:none; font-weight:700; font-size: 1.1rem;'>navigator@minnesotasure.org</a><span style='font-size: 0.8rem; font-weight: 400; color: var(--text-muted); display: block; margin-top: 0.5rem;'>Ми розмовляємо англійською, українською та іспанською</span>"
  }
  };
 
  function setLang(lang) {
+ currentLang = lang;
+
  // Update toggle UI
  document.getElementById('btn-lang-eng').classList.remove('active');
  document.getElementById('btn-lang-esp').classList.remove('active');
  document.getElementById('btn-lang-ukr').classList.remove('active');
  document.getElementById(`btn-lang-${lang}`).classList.add('active');
 
- // Apply translations
+ // Apply text translations
  const t = trans[lang];
  document.getElementById('t-brand').innerText = t.brand;
  document.getElementById('t-lbl-status').innerText = t.lblStatus;
@@ -646,12 +735,17 @@
  document.getElementById('t-submit').innerText = t.submit;
  document.getElementById('t-footer-text').innerText = t.footerText;
 
- // Only update reveal buttons if they haven't been clicked
+ // Handle Reveal Buttons
  if(!document.getElementById('btn-phone').classList.contains('revealed')) {
  document.getElementById('txt-phone').innerText = t.revealPhone;
+ } else {
+ document.getElementById('btn-phone').innerHTML = t.revealedPhoneContent;
  }
+
  if(!document.getElementById('btn-email').classList.contains('revealed')) {
  document.getElementById('txt-email').innerText = t.revealEmail;
+ } else {
+ document.getElementById('btn-email').innerHTML = t.revealedEmailContent;
  }
  }
  </script>
