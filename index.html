@@ -32,6 +32,7 @@
             display: flex;
             justify-content: center;
             padding: 2rem 1rem;
+            min-height: 100vh;
         }
 
         .container {
@@ -44,7 +45,6 @@
             border: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* --- TOP HEADER --- */
         .top-meta {
             display: flex;
             justify-content: space-between;
@@ -54,54 +54,133 @@
             gap: 1rem;
         }
 
-        .top-meta h2 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-main);
-        }
-
-        .meta-stats {
-            display: flex;
-            gap: 2rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-        }
-
-        .meta-stat {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .meta-label {
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.2rem;
-        }
-
-        .meta-value {
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        /* --- HERO TITLE --- */
-        .hero-title-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
         .hero-title {
-            font-size: 1.8rem;
-            font-weight: 700;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, #94A3B8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .badge-free {
-            border: 1px solid #10B981;
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.1);
             color: #10B981;
-            padding: 0.25rem 0.75rem;
+            padding: 0.5rem 1rem;
             border-radius: 999px;
-            font-size: 0.75rem;
-            font
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .contact-box {
+            background: linear-gradient(145deg, #1C1D26, #15161E);
+            padding: 3rem;
+            border-radius: 24px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+            margin: 0.5rem;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-blue-hover);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            background: var(--bg-input);
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 1.5rem; }
+            .hero-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-meta">
+            <div>
+                <span class="badge-free">Certified Navigator Services</span>
+                <h1 class="hero-title">MNsure Help</h1>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h3>MinnesotaCare</h3>
+                <p>Lower-cost health insurance for Minnesotans who don't have access to employer-sponsored coverage.</p>
+            </div>
+            <div class="card">
+                <h3>Medical Assistance</h3>
+                <p>Minnesota's Medicaid program for people with low income.</p>
+            </div>
+            <div class="card">
+                <h3>Qualified Plans</h3>
+                <p>Private insurance plans with tax credits to lower your monthly premium.</p>
+            </div>
+        </div>
+
+        <div class="contact-box">
+            <h2 style="margin-bottom: 1.5rem;">Get in Touch</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Professional assistance at no cost to you.</p>
+            <a href="sms:+15078587188" class="btn btn-primary">Text: +1 (507) 858-7188</a>
+            <a href="mailto:navigator@minnesotasure.org" class="btn btn-outline">Email Specialist</a>
+        </div>
+    </div>
+</body>
+</html>
