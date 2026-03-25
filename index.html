@@ -4,416 +4,748 @@
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>MNsure Navigator Services</title>
- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
  <style>
  :root {
- --primary: #005A8C;
- --secondary: #4DA1A9;
- --bg-color: #F8FAFC;
- --text-color: #1E293B;
- --card-bg: #FFFFFF;
+ /* Default Dark Theme Variables */
+ --bg-body: #0F1115;
+ --bg-container: #15161E;
+ --bg-card: #1C1D26;
+ --bg-input: #272935;
+ --bg-input-hover: #323544;
+ --accent-blue: #3B82F6;
+ --accent-blue-hover: #2563EB;
+ --text-main: #F8FAFC;
+ --text-muted: #94A3B8;
+ --border-color: #333645;
+ --container-border: rgba(255,255,255,0.05);
+ --container-shadow: rgba(0, 0, 0, 0.5);
+ }
+
+ /* Light Theme Variables */
+ body.light-theme {
+ --bg-body: #F1F5F9;
+ --bg-container: #FFFFFF;
+ --bg-card: #FFFFFF;
+ --bg-input: #F8FAFC;
+ --bg-input-hover: #E2E8F0;
+ --accent-blue: #2563EB;
+ --accent-blue-hover: #1D4ED8;
+ --text-main: #0F172A;
+ --text-muted: #64748B;
+ --border-color: #E2E8F0;
+ --container-border: rgba(0,0,0,0.1);
+ --container-shadow: rgba(0, 0, 0, 0.05);
+ }
+
+ * {
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
  }
 
  body {
  font-family: 'Inter', sans-serif;
- background-color: var(--bg-color);
- color: var(--text-color);
- margin: 0;
- padding: 0;
+ background-color: var(--bg-body);
+ color: var(--text-main);
  line-height: 1.6;
- }
-
- header {
- background-color: var(--primary);
- color: white;
- padding: 2rem 1rem;
- text-align: center;
- position: relative;
- }
-
- .lang-selector {
- position: absolute;
- top: 1rem;
- right: 1rem;
- }
-
- .lang-selector select {
- padding: 0.5rem;
- border-radius: 5px;
- border: none;
- font-family: 'Inter', sans-serif;
- cursor: pointer;
- }
-
- .badge {
- background-color: #10B981;
- color: white;
- padding: 0.5rem 1rem;
- border-radius: 9999px;
- font-weight: 600;
- display: inline-block;
- margin-top: 1rem;
- text-transform: uppercase;
- letter-spacing: 1px;
- font-size: 0.85rem;
- }
-
- main {
- max-width: 800px;
- margin: 0 auto;
- padding: 2rem 1rem;
- }
-
- .services {
  display: flex;
- gap: 1rem;
  justify-content: center;
+ padding: 2rem 1rem;
+ transition: background-color 0.3s, color 0.3s;
+ }
+
+ .container {
+ max-width: 900px;
+ width: 100%;
+ background-color: var(--bg-container);
+ border-radius: 20px;
+ padding: 2.5rem;
+ box-shadow: 0 25px 50px -12px var(--container-shadow);
+ border: 1px solid var(--container-border);
+ transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+ }
+
+ /* --- TOP HEADER --- */
+ .top-meta {
+ display: flex;
+ justify-content: space-between;
+ align-items: flex-start;
+ margin-bottom: 3rem;
  flex-wrap: wrap;
+ gap: 1rem;
+ }
+
+ .top-meta h2 {
+ font-size: 1.1rem;
+ font-weight: 600;
+ color: var(--text-main);
+ }
+
+ .meta-right {
+ display: flex;
+ gap: 1.5rem;
+ align-items: center;
+ }
+
+ .meta-stats {
+ display: flex;
+ gap: 2rem;
+ font-family: 'JetBrains Mono', monospace;
+ font-size: 0.75rem;
+ }
+
+ .meta-stat {
+ display: flex;
+ flex-direction: column;
+ }
+
+ .meta-label {
+ color: var(--text-muted);
+ text-transform: uppercase;
+ letter-spacing: 0.5px;
+ margin-bottom: 0.2rem;
+ }
+
+ .meta-value {
+ font-weight: 700;
+ color: var(--text-main);
+ }
+
+ .theme-toggle {
+ background: var(--bg-input);
+ border: 1px solid var(--border-color);
+ color: var(--text-main);
+ width: 40px;
+ height: 40px;
+ border-radius: 50%;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ cursor: pointer;
+ font-size: 1.2rem;
+ transition: all 0.2s;
+ }
+
+ .theme-toggle:hover {
+ background: var(--bg-input-hover);
+ transform: scale(1.05);
+ }
+
+ /* --- HERO TITLE --- */
+ .hero-title-container {
+ display: flex;
+ align-items: center;
+ gap: 1rem;
+ margin-bottom: 2rem;
+ flex-wrap: wrap;
+ }
+
+ .hero-title {
+ font-size: 1.8rem;
+ font-weight: 700;
+ }
+
+ .badge-free {
+ border: 1px solid #10B981;
+ color: #10B981;
+ padding: 0.25rem 0.75rem;
+ border-radius: 999px;
+ font-size: 0.75rem;
+ font-weight: 600;
+ text-transform: uppercase;
+ letter-spacing: 0.5px;
+ background: rgba(16, 185, 129, 0.1);
+ }
+
+ /* --- SERVICE CARDS --- */
+ .cards-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+ gap: 1.5rem;
  margin-bottom: 3rem;
  }
 
  .service-card {
- background: var(--card-bg);
- padding: 1.5rem;
+ background-color: var(--bg-card);
  border-radius: 12px;
- box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
- flex: 1 1 200px;
+ padding: 2rem 1.5rem;
  text-align: center;
- font-weight: 600;
- color: var(--primary);
- border-top: 4px solid var(--secondary);
- transition: transform 0.2s;
+ border-top: 4px solid var(--accent-blue);
+ box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+ transition: transform 0.2s, background-color 0.3s;
+ border-left: 1px solid var(--border-color);
+ border-right: 1px solid var(--border-color);
+ border-bottom: 1px solid var(--border-color);
  }
 
  .service-card:hover {
  transform: translateY(-5px);
  }
 
- .contact-section {
- background: var(--card-bg);
- padding: 2rem;
- border-radius: 12px;
- box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
- text-align: center;
- margin-bottom: 3rem;
+ .card-icon {
+ width: 48px;
+ height: 48px;
+ margin: 0 auto 1.5rem;
+ color: var(--accent-blue);
  }
 
- .reveal-btn {
- background-color: var(--primary);
- color: white;
- border: none;
- padding: 0.75rem 1.5rem;
- border-radius: 8px;
- font-size: 1rem;
- cursor: pointer;
- margin: 0.5rem;
- transition: background 0.3s;
- font-weight: 600;
- }
-
- .reveal-btn:hover {
- background-color: #004368;
- }
-
- .form-section {
- background: var(--card-bg);
- padding: 2rem;
- border-radius: 12px;
- box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
- }
-
- .form-group {
- margin-bottom: 1.5rem;
- }
-
- label {
- display: block;
- margin-bottom: 0.5rem;
- font-weight: 600;
- }
-
- input[type="text"], input[type="email"], input[type="date"], input[type="number"], select {
- width: 100%;
- padding: 0.75rem;
- border: 1px solid #CBD5E1;
- border-radius: 8px;
- box-sizing: border-box;
- font-family: 'Inter', sans-serif;
- }
-
- .radio-group {
- display: flex;
- gap: 1rem;
- margin-top: 0.5rem;
- flex-wrap: wrap;
- }
-
- .note {
- font-size: 0.85rem;
- color: #64748B;
- margin-bottom: 1.5rem;
- display: block;}
-
- .submit-btn {
- background-color: var(--secondary);
- color: white;
- border: none;
- padding: 1rem 2rem;
- border-radius: 8px;
- width: 100%;
+ .card-title {
  font-size: 1.1rem;
+ font-weight: 700;
+ margin-bottom: 0.5rem;
+ }
+
+ .card-desc {
+ font-size: 0.85rem;
+ color: var(--text-muted);
+ }
+
+ /* --- CONTACT / FORM SECTION --- */
+ .contact-header {
+ font-size: 1.2rem;
+ font-weight: 700;
+ margin-bottom: 1.5rem;
+ }
+
+ .dashed-divider {
+ border-top: 1px dashed var(--border-color);
+ margin: 0 -2.5rem 2rem;
+ transition: border-color 0.3s;
+ }
+
+ .controls-grid {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 1.5rem;
+ margin-bottom: 2rem;
+ }
+
+ @media (max-width: 768px) {
+ .controls-grid { grid-template-columns: 1fr; }
+ }
+
+ .control-row {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ background: var(--bg-card);
+ padding: 0.75rem 1rem;
+ border-radius: 12px;
+ gap: 1rem;
+ border: 1px solid var(--border-color);
+ transition: background-color 0.3s, border-color 0.3s;
+ }
+
+ .control-label {
+ font-size: 0.85rem;
+ color: var(--text-muted);
+ }
+
+ /* Toggles (Pills) */
+ .toggle-group {
+ display: flex;
+ background: var(--bg-input);
+ border-radius: 999px;
+ padding: 0.25rem;
+ flex-shrink: 0;
+ transition: background-color 0.3s;
+ }
+
+ .toggle-btn {
+ background: transparent;
+ border: none;
+ color: var(--text-muted);
+ padding: 0.4rem 1rem;
+ border-radius: 999px;
+ font-size: 0.85rem;
+ font-weight: 600;
  cursor: pointer;
- font-weight: bold;
- transition: background 0.3s;
+ transition: all 0.2s;
+ font-family: inherit;
+ }
+
+ .toggle-btn.active {
+ background: var(--accent-blue);
+ color: white;
+ box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+ }
+
+ /* Contact Reveal Buttons */
+ .contact-pill {
+ background: var(--bg-input);
+ border: 1px solid var(--border-color);
+ color: var(--text-main);
+ padding: 0.75rem 1.5rem;
+ border-radius: 12px;
+ font-size: 0.9rem;
+ font-weight: 500;
+ cursor: pointer;
+ width: 100%;
+ text-align: center;
+ transition: all 0.2s;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ text-decoration: none;
+ min-height: 52px;
+ }
+ 
+ .contact-pill:hover {
+ background: var(--bg-input-hover);
+ }
+
+ .contact-pill.revealed {
+ background: rgba(59, 130, 246, 0.05);
+ color: var(--accent-blue);
+ border-color: rgba(59, 130, 246, 0.3);
+ padding: 1rem;
+ line-height: 1.4;
+ cursor: default;
+ }
+
+ .contact-pill.revealed:hover {
+ background: rgba(59, 130, 246, 0.08);
+ }
+
+ /* Slider */
+ .slider-container {
+ display: flex;
+ align-items: center;
+ gap: 1rem;
+ flex-grow: 1;
+ }
+
+ input[type=range] {
+ -webkit-appearance: none;
+ width: 100%;
+ background: transparent;
+ }
+
+ input[type=range]::-webkit-slider-thumb {
+ -webkit-appearance: none;
+ height: 18px;
+ width: 18px;
+ border-radius: 50%;
+ background: var(--accent-blue);
+ cursor: pointer;
+ margin-top: -7px;
+ box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+ border: 2px solid white;
+ }
+
+ input[type=range]::-webkit-slider-runnable-track {
+ width: 100%;
+ height: 4px;
+ cursor: pointer;
+ background: linear-gradient(90deg, var(--accent-blue) var(--slider-percent, 0%), var(--border-color) var(--slider-percent, 0%));
+ border-radius: 2px;
+ }
+
+ .slider-value {
+ background: var(--bg-input);
+ border: 1px solid var(--border-color);
+ padding: 0.25rem 0.75rem;
+ border-radius: 6px;
+ font-size: 0.85rem;
+ font-weight: 700;
+ min-width: 40px;
+ text-align: center;
+ transition: all 0.3s;
+ }
+
+ /* Standard Inputs */
+ .text-inputs-grid {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 1rem;
+ margin-bottom: 2rem;
+ }
+
+ @media (max-width: 600px) {
+ .text-inputs-grid { grid-template-columns: 1fr; }
+ }
+
+ .input-field {
+ width: 100%;
+ background: var(--bg-input);
+ border: 1px solid var(--border-color);
+ color: var(--text-main);
+ padding: 0.85rem 1rem;
+ border-radius: 8px;
+ font-family: inherit;
+ font-size: 0.9rem;
+ transition: border-color 0.2s, background-color 0.3s, color 0.3s;
+ }
+
+ .input-field:focus {
+ outline: none;
+ border-color: var(--accent-blue);
+ background: var(--bg-card);
+ }
+ 
+ .input-field::placeholder {
+ color: var(--text-muted);
+ opacity: 0.7;
+ }
+
+ /* Submit */
+ .submit-btn {
+ width: 100%;
+ background: linear-gradient(180deg, #3B82F6 0%, #2563EB 100%);
+ color: white;
+ border: none;
+ padding: 1rem;
+ border-radius: 12px;
+ font-size: 1rem;
+ font-weight: 600;
+ cursor: pointer;
+ box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+ transition: transform 0.2s, box-shadow 0.2s;
  }
 
  .submit-btn:hover {
- background-color: #3b828a;
+ transform: translateY(-2px);
+ box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4);
  }
 
+ /* --- FOOTER LOGO --- */
+ .footer-section {
+ margin-top: 3rem;
+ padding-top: 2rem;
+ border-top: 1px dashed var(--border-color);
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 1rem;
+ transition: border-color 0.3s;
+ }
+
+ .logo-pill {
+ background-color: #FFFFFF;
+ padding: 0.75rem 1.5rem;
+ border-radius: 12px;
+ display: inline-flex;
+ justify-content: center;
+ align-items: center;
+ box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+ border: 1px solid #E2E8F0;
+ }
+
+ .logo-pill img {
+ height: 35px;
+ display: block;
+ }
+
+ .footer-text {
+ font-size: 0.8rem;
+ color: var(--text-muted);
+ text-transform: uppercase;
+ letter-spacing: 0.5px;
+ font-weight: 600;
+ }
+
+ /* Hidden inputs for Formspree mapping */
+ .hidden { display: none; }
  </style>
 </head>
 <body>
 
- <header>
- <div class="lang-selector">
- <select id="langSwitch" onchange="changeLanguage()">
- <option value="en">English</option>
- <option value="es">Español</option>
- <option value="uk">Українська</option>
- </select>
+ <div class="container">
+ <!-- Top Meta Section & Theme Toggle -->
+ <div class="top-meta">
+ <h2 id="t-brand">MNsure Navigator</h2>
+ <div class="meta-right">
+ <div class="meta-stats">
+ <div class="meta-stat">
+ <span class="meta-label" id="t-lbl-status">Status</span>
+ <span class="meta-value" id="t-val-status">Certified & Ready</span>
  </div>
- <h1 id="t-title">MNsure Navigator Services</h1>
- <div class="badge" id="t-free">Free of Charge</div>
- </header>
-
- <main>
- <div class="services">
- <div class="service-card" id="t-service1">MinnesotaCare</div>
- <div class="service-card" id="t-service2">Medical Assistance</div>
- <div class="service-card" id="t-service3">Qualified Health Plans</div>
  </div>
-
- <div class="contact-section">
- <h2 id="t-contact-title">Get in Touch</h2>
- <button class="reveal-btn" id="btn-phone" onclick="revealContact('phone')">
- <span id="t-reveal-phone">Click to text me</span>
- </button>
- <button class="reveal-btn" id="btn-email" onclick="revealContact('email')">
- <span id="t-reveal-email">Click to email me</span>
+ <!-- Light/Dark Toggle -->
+ <button type="button" class="theme-toggle" onclick="toggleTheme()" id="theme-btn" aria-label="Toggle Theme">
+ ☀️
  </button>
  </div>
+ </div>
 
- <div class="form-section">
- <h2 id="t-form-title">Get Help (Optional)</h2>
- <span class="note" id="t-form-note">All fields are optional. Fill out what you are comfortable sharing.</span>
+ <!-- Hero Title -->
+ <div class="hero-title-container">
+ <h1 class="hero-title" id="t-main-title">MNsure Certified Navigator</h1>
+ <span class="badge-free" id="t-free-badge">Free of Charge</span>
+ </div>
+
+ <!-- Services Cards -->
+ <div class="cards-grid">
+ <div class="service-card">
+ <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+ <div class="card-title" id="t-card1-title">Apply & Enroll</div>
+ <div class="card-desc" id="t-card1-desc">Get help starting a new application.</div>
+ </div>
  
- <form action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
+ <div class="service-card">
+ <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+ <div class="card-title" id="t-card2-title">Renew Coverage</div>
+ <div class="card-desc" id="t-card2-desc">Keep your current health plan active.</div>
+ </div>
+
+ <div class="service-card">
+ <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+ <div class="card-title" id="t-card3-title">Report Changes</div>
+ <div class="card-desc" id="t-card3-desc">Update income, address, or household.</div>
+ </div>
+ </div>
+
+ <!-- Form / Contact Section -->
+ <h3 class="contact-header" id="t-contact-header">Contact Information & Optional Intake</h3>
+ <div class="dashed-divider"></div>
+
+ <form action="https://formspree.io/f/xnjgegbe" method="POST">
  
- <div class="form-group">
- <label id="t-q-account">Do you have an account with MNsure?</label>
- <select name="Has_MNsure_Account">
- <option value="none">--</option>
- <option value="yes" id="t-opt-yes">Yes</option>
- <option value="no" id="t-opt-no">No</option>
- <option value="needs_help" id="t-opt-help">I need help creating one</option>
- </select>
+ <div class="controls-grid">
+ <!-- Language Toggle -->
+ <div class="control-row">
+ <span class="control-label">Language / Мова</span>
+ <div class="toggle-group">
+ <button type="button" class="toggle-btn active" onclick="setLang('eng')" id="btn-lang-eng">eng</button>
+ <button type="button" class="toggle-btn" onclick="setLang('esp')" id="btn-lang-esp">esp</button>
+ <button type="button" class="toggle-btn" onclick="setLang('ukr')" id="btn-lang-ukr">ukr</button>
+ </div>
+ </div>
+ 
+ <!-- Phone Reveal -->
+ <button type="button" class="contact-pill" id="btn-phone" onclick="revealPhone()">
+ <span id="txt-phone">Click to Reveal Phone</span>
+ </button>
+
+ <!-- Email Reveal -->
+ <button type="button" class="contact-pill" id="btn-email" onclick="revealEmail()">
+ <span id="txt-email">Click to Reveal Email</span>
+ </button>
+ 
+ <!-- MNsure Account Toggle -->
+ <div class="control-row">
+ <span class="control-label" id="t-lbl-account">MNsure Account?</span>
+ <div class="toggle-group">
+ <button type="button" class="toggle-btn" onclick="setToggle('account', 'yes')" id="btn-acc-yes">Yes</button>
+ <button type="button" class="toggle-btn" onclick="setToggle('account', 'no')" id="btn-acc-no">No</button>
+ </div>
+ <input type="hidden" name="Has_MNsure_Account" id="input-account" value="">
  </div>
 
- <div class="form-group">
- <label id="t-q-pending">Do you have a pending case?</label>
- <div class="radio-group">
- <label><input type="radio" name="Pending_Case" value="yes"> <span id="t-rad-yes">Yes</span></label>
- <label><input type="radio" name="Pending_Case" value="no"> <span id="t-rad-no">No</span></label>
+ <!-- Slider (Updated to 15) -->
+ <div class="control-row" style="grid-column: 1 / -1;">
+ <span class="control-label" id="t-lbl-household">Household Size</span>
+ <div class="slider-container">
+ <input type="range" min="1" max="15" value="1" name="Household_Size" id="household-slider" oninput="updateSlider(this.value)">
+ </div>
+ <span class="slider-value" id="household-val">1</span>
+ </div>
+
+ <!-- Medicare Toggle -->
+ <div class="control-row">
+ <span class="control-label" id="t-lbl-medicare">Do you have Medicare/65+</span>
+ <div class="toggle-group">
+ <button type="button" class="toggle-btn" onclick="setToggle('medicare', 'yes')" id="btn-med-yes">Yes</button>
+ <button type="button" class="toggle-btn" onclick="setToggle('medicare', 'no')" id="btn-med-no">No</button>
+ </div>
+ <input type="hidden" name="Has_Medicare" id="input-medicare" value="">
+ </div>
+
+ <!-- Pending Case Toggle (Updated text) -->
+ <div class="control-row">
+ <span class="control-label" id="t-lbl-pending">Pending MNsure Case?</span>
+ <div class="toggle-group">
+ <button type="button" class="toggle-btn" onclick="setToggle('pending', 'yes')" id="btn-pen-yes">Yes</button>
+ <button type="button" class="toggle-btn" onclick="setToggle('pending', 'no')" id="btn-pen-no">No</button>
+ </div>
+ <input type="hidden" name="Has_Pending_Case" id="input-pending" value="">
  </div>
  </div>
 
- <div class="form-group">
- <label id="t-q-household">How many people are in your household?</label>
- <input type="number" name="Household_Size" min="1">
- </div>
-
- <div class="form-group">
- <label id="t-q-coverage">Who needs health coverage?</label>
- <select name="Who_Needs_Coverage">
- <option value="none">--</option>
- <option value="only_me" id="t-cov-me">Only me</option>
- <option value="everyone" id="t-cov-all">Everyone in my household</option>
- <option value="some" id="t-cov-some">Some family members</option>
- </select>
- </div>
-
- <div class="form-group">
- <label id="t-lbl-name">Full Name</label>
- <input type="text" name="Full_Name">
- </div>
-
- <div class="form-group">
- <label id="t-lbl-phone">Phone Number</label><input type="text" name="Phone_Number">
- </div>
-
- <div class="form-group">
- <label id="t-lbl-email">Email Address</label>
- <input type="email" name="Email_Address">
- </div>
-
- <div class="form-group">
- <label id="t-lbl-dob">Date of Birth</label>
- <input type="date" name="Date_Of_Birth">
- </div>
-
- <div class="form-group">
- <label id="t-lbl-address">Address</label>
- <input type="text" name="Home_Address">
+ <!-- Standard Inputs -->
+ <div class="text-inputs-grid">
+ <input type="text" name="Full_Name" class="input-field" placeholder="Full Name" id="i-name">
+ <input type="text" name="Phone_Number" class="input-field" placeholder="Phone Number" id="i-phone">
+ <input type="email" name="Email_Address" class="input-field" placeholder="Email Address" id="i-email">
+ <input type="text" name="Date_Of_Birth" class="input-field" placeholder="Date of Birth (MM/DD/YYYY)" id="i-dob">
+ <input type="text" name="Address" class="input-field" placeholder="Home Address" style="grid-column: 1 / -1;" id="i-address">
  </div>
 
  <button type="submit" class="submit-btn" id="t-submit">Submit Request</button>
  </form>
+
+ <!-- Custom Inline Vector Logo -->
+ <div class="footer-section">
+ <div class="logo-pill">
+ <svg width="220" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+ <!-- Abstract Minnesota Squares Logo -->
+ <rect x="22" y="8" width="5" height="5" rx="1" fill="#74B4B9" opacity="0.9" />
+ <rect x="12" y="15" width="9" height="9" rx="1.5" fill="#84A57A" opacity="0.9" />
+ <rect x="23" y="17" width="8" height="8" rx="1.5" fill="#74B4B9" opacity="0.8" />
+ <rect x="33" y="16" width="6" height="6" rx="1" fill="#75A666" opacity="0.9" />
+ <rect x="13" y="26" width="10" height="10" rx="2" fill="#C46244" opacity="0.9" />
+ <rect x="25" y="27" width="8" height="8" rx="1.5" fill="#E28929" opacity="0.9" />
+ <rect x="18" y="38" width="12" height="12" rx="2" fill="#74B4B9" opacity="0.9" />
+ <rect x="12" y="44" width="5" height="5" rx="1" fill="#E28929" opacity="0.9" />
+ <rect x="32" y="44" width="7" height="7" rx="1.5" fill="#B3C458" opacity="0.9" />
+ <!-- MNsure Text -->
+ <text x="48" y="46" font-family="'Inter', sans-serif" font-weight="700" font-size="34" fill="#F59E0B">MN<tspan fill="#4DA1A9" font-weight="400">sure</tspan></text>
+ </svg>
  </div>
- </main>
+ <span class="footer-text" id="t-footer-text">Official Certified Assister</span>
+ </div>
+
+ </div>
 
  <script>
- const translations = {
- en: {
- title: "MNsure Navigator Services",
- free: "Free of Charge",
- service1: "MinnesotaCare",
- service2: "Medical Assistance",
- service3: "Qualified Health Plans",
- contactTitle: "Get in Touch",
- revealPhone: "Click to text me",
- revealEmail: "Click to email me",
- formTitle: "Get Help (Optional)",
- formNote: "All fields are optional. Fill out what you are comfortable sharing.",
- qAccount: "Do you have an account with MNsure?",
- optYes: "Yes",
- optNo: "No",
- optHelp: "I need help creating one",
- qPending: "Do you have a pending case?",
- radYes: "Yes",
- radNo: "No",
- qHousehold: "How many people are in your household?",
- qCoverage: "Who needs health coverage?",
- covMe: "Only me",
- covAll: "Everyone in my household",
- covSome: "Some family members",
- lblName: "Full Name",
- lblPhone: "Phone Number",
- lblEmail: "Email Address",
- lblDob: "Date of Birth",
- lblAddress: "Address",
- submit: "Submit Request"
+ let currentLang = 'eng';
+
+ // Theme Toggle Logic
+ function toggleTheme() {
+ document.body.classList.toggle('light-theme');
+ const isLight = document.body.classList.contains('light-theme');
+ document.getElementById('theme-btn').innerText = isLight ? '🌙' : '☀️';
+ }
+
+ // Initialize slider gradient (Max 15)
+ updateSlider(1);
+ function updateSlider(val) {
+ document.getElementById('household-val').innerText = val;
+ const percentage = ((val - 1) / 14) * 100;
+ document.getElementById('household-slider').style.setProperty('--slider-percent', percentage + '%');
+ }
+
+ // Toggle Buttons Logic
+ function setToggle(group, value) {
+ document.getElementById(`btn-${group.substring(0,3)}-yes`).classList.remove('active');
+ document.getElementById(`btn-${group.substring(0,3)}-no`).classList.remove('active');
+ document.getElementById(`btn-${group.substring(0,3)}-${value}`).classList.add('active');
+ document.getElementById(`input-${group}`).value = value;
+ }
+
+ // Reveal Contact Logic
+ function revealPhone() {
+ const btn = document.getElementById('btn-phone');
+ btn.classList.add('revealed');
+ btn.innerHTML = trans[currentLang].revealedPhoneContent;
+ }
+
+ function revealEmail() {
+ const btn = document.getElementById('btn-email');
+ btn.classList.add('revealed');
+ btn.innerHTML = trans[currentLang].revealedEmailContent;
+ }
+
+ // Translation Logic (Includes detailed contact notes)
+ const trans = {
+ eng: {
+ brand: "MNsure Navigator",
+ lblStatus: "Status", valStatus: "Certified & Ready",
+ mainTitle: "MNsure Certified Navigator", freeBadge: "Free of Charge",
+ c1Title: "Apply & Enroll", c1Desc: "Get help starting a new application.",
+ c2Title: "Renew Coverage", c2Desc: "Keep your current health plan active.",
+ c3Title: "Report Changes", c3Desc: "Update income, address, or household.",
+ contactHeader: "Contact Information & Optional Intake",
+ lblAccount: "MNsure Account?", lblHousehold: "Household Size",
+ lblMedicare: "Do you have Medicare/65+", lblPending: "Pending MNsure Case?",
+ btnYes: "Yes", btnNo: "No",
+ phName: "Full Name", phPhone: "Phone Number", phEmail: "Email Address", phDob: "Date of Birth (MM/DD/YYYY)", phAddress: "Home Address",
+ submit: "Submit Request", revealPhone: "Click to Reveal Phone", revealEmail: "Click to Reveal Email", footerText: "Official Certified Assister",
+ revealedPhoneContent: "<a href='sms:+15078587188' style='color:inherit; text-decoration:none; font-weight:700; font-size: 1.1rem;'>+1 (507) 858-7188</a><span style='font-size: 0.85rem; font-weight: 500; margin-top: 0.5rem; display: block;'>(Please text us instead of calling)</span><span style='font-size: 0.8rem; font-weight: 400; color: var(--text-muted); display: block; margin-top: 0.25rem;'>We speak English, Ukrainian, and Spanish</span>",
+ revealedEmailContent: "<a href='mailto:navigator@minnesotasure.org' style='color:inherit; text-decoration:none; font-weight:700; font-size: 1.1rem;'>navigator@minnesotasure.org</a><span style='font-size: 0.8rem; font-weight: 400; color: var(--text-muted); display: block; margin-top: 0.5rem;'>We speak English, Ukrainian, and Spanish</span>"
  },
- es: {
- title: "Servicios de Navegador de MNsure",
- free: "Sin Costo",
- service1: "MinnesotaCare",
- service2: "Asistencia Médica",
- service3: "Planes de Salud Calificados",
- contactTitle: "Contáctenos",
- revealPhone: "Clic para enviarme un mensaje",
- revealEmail: "Clic para enviarme un correo",
- formTitle: "Obtener Ayuda (Opcional)",
- formNote: "Todos los campos son opcionales. Complete lo que se sienta cómodo compartiendo.",
- qAccount: "¿Tiene una cuenta con MNsure?",
- optYes: "Sí",
- optNo: "No",
- optHelp: "Necesito ayuda para crear una",
- qPending: "¿Tiene un caso pendiente?",
- radYes: "Sí",
- radNo: "No",
- qHousehold: "¿Cuántas personas hay en su hogar?",
- qCoverage: "¿Quién necesita cobertura de salud?",
- covMe: "Solo yo",
- covAll: "Todos en mi hogar",
- covSome: "Algunos miembros de la familia",
- lblName: "Nombre Completo",
- lblPhone: "Número de Teléfono",
- lblEmail: "Correo Electrónico",
- lblDob: "Fecha de Nacimiento",
- lblAddress: "Dirección",
- submit: "Enviar Solicitud"
+ esp: {
+ brand: "Navegador de MNsure",
+ lblStatus: "Estado", valStatus: "Certificado y Listo",
+ mainTitle: "Navegador Certificado de MNsure", freeBadge: "Sin Costo",
+ c1Title: "Aplicar e Inscribirse", c1Desc: "Obtenga ayuda para iniciar una nueva aplicación.",
+ c2Title: "Renovar Cobertura", c2Desc: "Mantenga activo su plan de salud actual.",
+ c3Title: "Reportar Cambios", c3Desc: "Actualice ingresos, dirección o su hogar.",
+ contactHeader: "Información de Contacto",
+ lblAccount: "¿Cuenta MNsure?", lblHousehold: "Tamaño del Hogar",
+ lblMedicare: "¿Tiene Medicare/65+", lblPending: "¿Caso MNsure Pendiente?",
+ btnYes: "Sí", btnNo: "No",
+ phName: "Nombre Completo", phPhone: "Número de Teléfono", phEmail: "Correo Electrónico", phDob: "Fecha de Nacimiento", phAddress: "Dirección",
+ submit: "Enviar Solicitud", revealPhone: "Clic para revelar teléfono", revealEmail: "Clic para revelar email", footerText: "Asistente Oficial Certificado",
+ revealedPhoneContent: "<a href='sms:+15078587188' style='color:inherit; text-decoration:none; font-weight:700; font-size: 1.1rem;'>+1 (507) 858-7188</a><span style='font-size: 0.85rem; font-weight: 500; margin-top: 0.5rem; display: block;'>(Por favor, envíenos un texto en lugar de llamar)</span><span style='font-size: 0.8rem; font-weight: 400; color: var(--text-muted); display: block; margin-top: 0.25rem;'>Hablamos Inglés, Ucraniano y Español</span>",
+ revealedEmailContent: "<a href='mailto:navigator@minnesotasure.org' style='color:inherit; text-decoration:none; font-weight:700; font-size: 1.1rem;'>navigator@minnesotasure.org</a><span style='font-size: 0.8rem; font-weight: 400; color: var(--text-muted); display: block; margin-top: 0.5rem;'>Hablamos Inglés, Ucraniano y Español</span>"
  },
- uk: {
- title: "Послуги навігатора MNsure",
- free: "Безкоштовно",
- service1: "MinnesotaCare",
- service2: "Медична допомога",
- service3: "Кваліфіковані плани",
- contactTitle: "Зв'яжіться зі мною",
- revealPhone: "Натисніть, щоб написати SMS",
- revealEmail: "Натисніть, щоб написати Email",formTitle: "Отримати допомогу (Необов'язково)",
- formNote: "Всі поля необов'язкові. Заповніть те, чим готові поділитися.",
- qAccount: "Чи є у вас акаунт в MNsure?",
- optYes: "Так",
- optNo: "Ні",
- optHelp: "Мені потрібна допомога",
- qPending: "Чи є у вас справа на розгляді?",
- radYes: "Так",
- radNo: "Ні",
- qHousehold: "Скільки людей у вашій родині?",
- qCoverage: "Кому потрібне страхування?",
- covMe: "Тільки мені",
- covAll: "Всім у родині",
- covSome: "Лише деяким членам родини",
- lblName: "Повне ім'я",
- lblPhone: "Номер телефону",
- lblEmail: "Електронна пошта",
- lblDob: "Дата народження",
- lblAddress: "Адреса",
- submit: "Надіслати запит"
+ ukr: {
+ brand: "Навігатор MNsure",
+ lblStatus: "Статус", valStatus: "Сертифікований",
+ mainTitle: "Сертифікований навігатор MNsure", freeBadge: "Безкоштовно",
+ c1Title: "Подати заявку", c1Desc: "Допомога з новою заявкою на страхування.",
+ c2Title: "Поновити покриття", c2Desc: "Збережіть свій поточний план активним.",
+ c3Title: "Повідомити про зміни", c3Desc: "Оновіть дохід, адресу або склад сім'ї.",
+ contactHeader: "Контактна інформація",
+ lblAccount: "Акаунт MNsure?", lblHousehold: "Склад сім'ї",
+ lblMedicare: "У вас є Medicare/65+", lblPending: "Справа MNsure на розгляді?",
+ btnYes: "Так", btnNo: "Ні",
+ phName: "Повне ім'я", phPhone: "Номер телефону", phEmail: "Електронна пошта", phDob: "Дата народження", phAddress: "Домашня адреса",
+ submit: "Надіслати запит", revealPhone: "Натисніть, щоб побачити телефон", revealEmail: "Натисніть, щоб побачити Email", footerText: "Офіційний сертифікований помічник",
+ revealedPhoneContent: "<a href='sms:+15078587188' style='color:inherit; text-decoration:none; font-weight:700; font-size: 1.1rem;'>+1 (507) 858-7188</a><span style='font-size: 0.85rem; font-weight: 500; margin-top: 0.5rem; display: block;'>(Будь ласка, пишіть нам замість дзвінків)</span><span style='font-size: 0.8rem; font-weight: 400; color: var(--text-muted); display: block; margin-top: 0.25rem;'>Ми розмовляємо англійською, українською та іспанською</span>",
+ revealedEmailContent: "<a href='mailto:navigator@minnesotasure.org' style='color:inherit; text-decoration:none; font-weight:700; font-size: 1.1rem;'>navigator@minnesotasure.org</a><span style='font-size: 0.8rem; font-weight: 400; color: var(--text-muted); display: block; margin-top: 0.5rem;'>Ми розмовляємо англійською, українською та іспанською</span>"
  }
  };
 
- function changeLanguage() {
- const lang = document.getElementById('langSwitch').value;
- const t = translations[lang];
+ function setLang(lang) {
+ currentLang = lang;
 
- document.getElementById('t-title').innerText = t.title;
- document.getElementById('t-free').innerText = t.free;
- document.getElementById('t-service1').innerText = t.service1;
- document.getElementById('t-service2').innerText = t.service2;
- document.getElementById('t-service3').innerText = t.service3;
- document.getElementById('t-contact-title').innerText = t.contactTitle;
+ // Update toggle UI
+ document.getElementById('btn-lang-eng').classList.remove('active');
+ document.getElementById('btn-lang-esp').classList.remove('active');
+ document.getElementById('btn-lang-ukr').classList.remove('active');
+ document.getElementById(`btn-lang-${lang}`).classList.add('active');
+
+ // Apply text translations
+ const t = trans[lang];
+ document.getElementById('t-brand').innerText = t.brand;
+ document.getElementById('t-lbl-status').innerText = t.lblStatus;
+ document.getElementById('t-val-status').innerText = t.valStatus;
+ document.getElementById('t-main-title').innerText = t.mainTitle;
+ document.getElementById('t-free-badge').innerText = t.freeBadge;
  
- if(document.getElementById('btn-phone').dataset.revealed !== 'true') {
- document.getElementById('t-reveal-phone').innerText = t.revealPhone;
- }
- if(document.getElementById('btn-email').dataset.revealed !== 'true') {
- document.getElementById('t-reveal-email').innerText = t.revealEmail;
- }
+ document.getElementById('t-card1-title').innerText = t.c1Title;
+ document.getElementById('t-card1-desc').innerText = t.c1Desc;
+ document.getElementById('t-card2-title').innerText = t.c2Title;
+ document.getElementById('t-card2-desc').innerText = t.c2Desc;
+ document.getElementById('t-card3-title').innerText = t.c3Title;
+ document.getElementById('t-card3-desc').innerText = t.c3Desc;
+ 
+ document.getElementById('t-contact-header').innerText = t.contactHeader;
+ document.getElementById('t-lbl-account').innerText = t.lblAccount;
+ document.getElementById('t-lbl-household').innerText = t.lblHousehold;
+ document.getElementById('t-lbl-medicare').innerText = t.lblMedicare;
+ document.getElementById('t-lbl-pending').innerText = t.lblPending;
 
- document.getElementById('t-form-title').innerText = t.formTitle;
- document.getElementById('t-form-note').innerText = t.formNote;
- document.getElementById('t-q-account').innerText = t.qAccount;
- document.getElementById('t-opt-yes').innerText = t.optYes;
- document.getElementById('t-opt-no').innerText = t.optNo;
- document.getElementById('t-opt-help').innerText = t.optHelp;
- document.getElementById('t-q-pending').innerText = t.qPending;
- document.getElementById('t-rad-yes').innerText = t.radYes;
- document.getElementById('t-rad-no').innerText = t.radNo;
- document.getElementById('t-q-household').innerText = t.qHousehold;
- document.getElementById('t-q-coverage').innerText = t.qCoverage;
- document.getElementById('t-cov-me').innerText = t.covMe;
- document.getElementById('t-cov-all').innerText = t.covAll;
- document.getElementById('t-cov-some').innerText = t.covSome;
- document.getElementById('t-lbl-name').innerText = t.lblName;
- document.getElementById('t-lbl-phone').innerText = t.lblPhone;
- document.getElementById('t-lbl-email').innerText = t.lblEmail;
- document.getElementById('t-lbl-dob').innerText = t.lblDob;
- document.getElementById('t-lbl-address').innerText = t.lblAddress;
+ document.getElementById('btn-acc-yes').innerText = t.btnYes;
+ document.getElementById('btn-acc-no').innerText = t.btnNo;
+ document.getElementById('btn-med-yes').innerText = t.btnYes;
+ document.getElementById('btn-med-no').innerText = t.btnNo;
+ document.getElementById('btn-pen-yes').innerText = t.btnYes;
+ document.getElementById('btn-pen-no').innerText = t.btnNo;
+
+ document.getElementById('i-name').placeholder = t.phName;
+ document.getElementById('i-phone').placeholder = t.phPhone;
+ document.getElementById('i-email').placeholder = t.phEmail;
+ document.getElementById('i-dob').placeholder = t.phDob;
+ document.getElementById('i-address').placeholder = t.phAddress;
  document.getElementById('t-submit').innerText = t.submit;
+ document.getElementById('t-footer-text').innerText = t.footerText;
+
+ // Handle Reveal Buttons
+ if(!document.getElementById('btn-phone').classList.contains('revealed')) {
+ document.getElementById('txt-phone').innerText = t.revealPhone;
+ } else {
+ document.getElementById('btn-phone').innerHTML = t.revealedPhoneContent;
  }
 
- function revealContact(type) {
- if (type === 'phone') {
- const btn = document.getElementById('btn-phone');
- btn.innerHTML = '<a href="sms:+15078587188" style="color:white; text-decoration:none;">Text: +1 (507) 858-7188</a>';
- btn.dataset.revealed = 'true';
- } else if (type === 'email') {
- const btn = document.getElementById('btn-email');
- btn.innerHTML = '<a href="mailto:navigator@minnesotasure.org" style="color:white; text-decoration:none;">navigator@minnesotasure.org</a>';
- btn.dataset.revealed = 'true';
+ if(!document.getElementById('btn-email').classList.contains('revealed')) {
+ document.getElementById('txt-email').innerText = t.revealEmail;
+ } else {
+ document.getElementById('btn-email').innerHTML = t.revealedEmailContent;
  }
  }
  </script>
