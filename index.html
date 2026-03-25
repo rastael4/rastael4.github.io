@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>MNsure Navigator Services</title>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+ <style>
+ :root {
+ --primary: #005A8C;
+ --secondary: #4DA1A9;
+ --bg-color: #F8FAFC;
+ --text-color: #1E293B;
+ --card-bg: #FFFFFF;
+ }
+
+ body {
+ font-family: 'Inter', sans-serif;
+ background-color: var(--bg-color);
+ color: var(--text-color);
+ margin: 0;
+ padding: 0;
+ line-height: 1.6;
+ }
+
+ header {
+ background-color: var(--primary);
+ color: white;
+ padding: 2rem 1rem;
+ text-align: center;
+ position: relative;
+ }
+
+ .lang-selector {
+ position: absolute;
+ top: 1rem;
+ right: 1rem;
+ }
+
+ .lang-selector select {
+ padding: 0.5rem;
+ border-radius: 5px;
+ border: none;
+ font-family: 'Inter', sans-serif;
+ cursor: pointer;
+ }
+
+ .badge {
+ background-color: #10B981;
+ color: white;
+ padding: 0.5rem 1rem;
+ border-radius: 9999px;
+ font-weight: 600;
+ display: inline-block;
+ margin-top: 1rem;
+ text-transform: uppercase;
+ letter-spacing: 1px;
+ font-size: 0.85rem;
+ }
+
+ main {
+ max-width: 800px;
+ margin: 0 auto;
+ padding: 2rem 1rem;
+ }
+
+ .services {
+ display: flex;
+ gap: 1rem;
+ justify-content: center;
+ flex-wrap: wrap;
+ margin-bottom: 3rem;
+ }
+
+ .service-card {
+ background: var(--card-bg);
+ padding: 1.5rem;
+ border-radius: 12px;
+ box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+ flex: 1 1 200px;
+ text-align: center;
+ font-weight: 600;
+ color: var(--primary);
+ border-top: 4px solid var(--secondary);
+ transition: transform 0.2s;
+ }
+
+ .service-card:hover {
+ transform: translateY(-5px);
+ }
+
+ .contact-section {
+ background: var(--card-bg);
+ padding: 2rem;
+ border-radius: 12px;
+ box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+ text-align: center;
+ margin-bottom: 3rem;
+ }
+
+ .reveal-btn {
+ background-color: var(--primary);
+ color: white;
+ border: none;
+ padding: 0.75rem 1.5rem;
+ border-radius: 8px;
+ font-size: 1rem;
+ cursor: pointer;
+ margin: 0.5rem;
+ transition: background 0.3s;
+ font-weight: 600;
+ }
+
+ .reveal-btn:hover {
+ background-color: #004368;
+ }
+
+ .form-section {
+ background: var(--card-bg);
+ padding: 2rem;
+ border-radius: 12px;
+ box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+ }
+
+ .form-group {
+ margin-bottom: 1.5rem;
+ }
+
+ label {
+ display: block;
+ margin-bottom: 0.5rem;
+ font-weight: 600;
+ }
+
+ input[type="text"], input[type="email"], input[type="date"], input[type="number"], select {
+ width: 100%;
+ padding: 0.75rem;
+ border: 1px solid #CBD5E1;
+ border-radius: 8px;
+ box-sizing: border-box;
+ font-family: 'Inter', sans-serif;
+ }
+
+ .radio-group {
+ display: flex;
+ gap: 1rem;
+ margin-top: 0.5rem;
+ flex-wrap: wrap;
+ }
+
+ .note {
+ font-size: 0.85rem;
+ color: #64748B;
+ margin-bottom: 1.5rem;
+ display: block;}
+
+ .submit-btn {
+ background-color: var(--secondary);
+ color: white;
+ border: none;
+ padding: 1rem 2rem;
+ border-radius: 8px;
+ width: 100%;
+ font-size: 1.1rem;
+ cursor: pointer;
+ font-weight: bold;
+ transition: background 0.3s;
+ }
+
+ .submit-btn:hover {
+ background-color: #3b828a;
+ }
+
+ </style>
+</head>
+<body>
+
+ <header>
+ <div class="lang-selector">
+ <select id="langSwitch" onchange="changeLanguage()">
+ <option value="en">English</option>
+ <option value="es">Español</option>
+ <option value="uk">Українська</option>
+ </select>
+ </div>
+ <h1 id="t-title">MNsure Navigator Services</h1>
+ <div class="badge" id="t-free">Free of Charge</div>
+ </header>
+
+ <main>
+ <div class="services">
+ <div class="service-card" id="t-service1">MinnesotaCare</div>
+ <div class="service-card" id="t-service2">Medical Assistance</div>
+ <div class="service-card" id="t-service3">Qualified Health Plans</div>
+ </div>
+
+ <div class="contact-section">
+ <h2 id="t-contact-title">Get in Touch</h2>
+ <button class="reveal-btn" id="btn-phone" onclick="revealContact('phone')">
+ <span id="t-reveal-phone">Click to text me</span>
+ </button>
+ <button class="reveal-btn" id="btn-email" onclick="revealContact('email')">
+ <span id="t-reveal-email">Click to email me</span>
+ </button>
+ </div>
+
+ <div class="form-section">
+ <h2 id="t-form-title">Get Help (Optional)</h2>
+ <span class="note" id="t-form-note">All fields are optional. Fill out what you are comfortable sharing.</span>
+ 
+ <form action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
+ 
+ <div class="form-group">
+ <label id="t-q-account">Do you have an account with MNsure?</label>
+ <select name="Has_MNsure_Account">
+ <option value="none">--</option>
+ <option value="yes" id="t-opt-yes">Yes</option>
+ <option value="no" id="t-opt-no">No</option>
+ <option value="needs_help" id="t-opt-help">I need help creating one</option>
+ </select>
+ </div>
+
+ <div class="form-group">
+ <label id="t-q-pending">Do you have a pending case?</label>
+ <div class="radio-group">
+ <label><input type="radio" name="Pending_Case" value="yes"> <span id="t-rad-yes">Yes</span></label>
+ <label><input type="radio" name="Pending_Case" value="no"> <span id="t-rad-no">No</span></label>
+ </div>
+ </div>
+
+ <div class="form-group">
+ <label id="t-q-household">How many people are in your household?</label>
+ <input type="number" name="Household_Size" min="1">
+ </div>
+
+ <div class="form-group">
+ <label id="t-q-coverage">Who needs health coverage?</label>
+ <select name="Who_Needs_Coverage">
+ <option value="none">--</option>
+ <option value="only_me" id="t-cov-me">Only me</option>
+ <option value="everyone" id="t-cov-all">Everyone in my household</option>
+ <option value="some" id="t-cov-some">Some family members</option>
+ </select>
+ </div>
+
+ <div class="form-group">
+ <label id="t-lbl-name">Full Name</label>
+ <input type="text" name="Full_Name">
+ </div>
+
+ <div class="form-group">
+ <label id="t-lbl-phone">Phone Number</label><input type="text" name="Phone_Number">
+ </div>
+
+ <div class="form-group">
+ <label id="t-lbl-email">Email Address</label>
+ <input type="email" name="Email_Address">
+ </div>
+
+ <div class="form-group">
+ <label id="t-lbl-dob">Date of Birth</label>
+ <input type="date" name="Date_Of_Birth">
+ </div>
+
+ <div class="form-group">
+ <label id="t-lbl-address">Address</label>
+ <input type="text" name="Home_Address">
+ </div>
+
+ <button type="submit" class="submit-btn" id="t-submit">Submit Request</button>
+ </form>
+ </div>
+ </main>
+
+ <script>
+ const translations = {
+ en: {
+ title: "MNsure Navigator Services",
+ free: "Free of Charge",
+ service1: "MinnesotaCare",
+ service2: "Medical Assistance",
+ service3: "Qualified Health Plans",
+ contactTitle: "Get in Touch",
+ revealPhone: "Click to text me",
+ revealEmail: "Click to email me",
+ formTitle: "Get Help (Optional)",
+ formNote: "All fields are optional. Fill out what you are comfortable sharing.",
+ qAccount: "Do you have an account with MNsure?",
+ optYes: "Yes",
+ optNo: "No",
+ optHelp: "I need help creating one",
+ qPending: "Do you have a pending case?",
+ radYes: "Yes",
+ radNo: "No",
+ qHousehold: "How many people are in your household?",
+ qCoverage: "Who needs health coverage?",
+ covMe: "Only me",
+ covAll: "Everyone in my household",
+ covSome: "Some family members",
+ lblName: "Full Name",
+ lblPhone: "Phone Number",
+ lblEmail: "Email Address",
+ lblDob: "Date of Birth",
+ lblAddress: "Address",
+ submit: "Submit Request"
+ },
+ es: {
+ title: "Servicios de Navegador de MNsure",
+ free: "Sin Costo",
+ service1: "MinnesotaCare",
+ service2: "Asistencia Médica",
+ service3: "Planes de Salud Calificados",
+ contactTitle: "Contáctenos",
+ revealPhone: "Clic para enviarme un mensaje",
+ revealEmail: "Clic para enviarme un correo",
+ formTitle: "Obtener Ayuda (Opcional)",
+ formNote: "Todos los campos son opcionales. Complete lo que se sienta cómodo compartiendo.",
+ qAccount: "¿Tiene una cuenta con MNsure?",
+ optYes: "Sí",
+ optNo: "No",
+ optHelp: "Necesito ayuda para crear una",
+ qPending: "¿Tiene un caso pendiente?",
+ radYes: "Sí",
+ radNo: "No",
+ qHousehold: "¿Cuántas personas hay en su hogar?",
+ qCoverage: "¿Quién necesita cobertura de salud?",
+ covMe: "Solo yo",
+ covAll: "Todos en mi hogar",
+ covSome: "Algunos miembros de la familia",
+ lblName: "Nombre Completo",
+ lblPhone: "Número de Teléfono",
+ lblEmail: "Correo Electrónico",
+ lblDob: "Fecha de Nacimiento",
+ lblAddress: "Dirección",
+ submit: "Enviar Solicitud"
+ },
+ uk: {
+ title: "Послуги навігатора MNsure",
+ free: "Безкоштовно",
+ service1: "MinnesotaCare",
+ service2: "Медична допомога",
+ service3: "Кваліфіковані плани",
+ contactTitle: "Зв'яжіться зі мною",
+ revealPhone: "Натисніть, щоб написати SMS",
+ revealEmail: "Натисніть, щоб написати Email",formTitle: "Отримати допомогу (Необов'язково)",
+ formNote: "Всі поля необов'язкові. Заповніть те, чим готові поділитися.",
+ qAccount: "Чи є у вас акаунт в MNsure?",
+ optYes: "Так",
+ optNo: "Ні",
+ optHelp: "Мені потрібна допомога",
+ qPending: "Чи є у вас справа на розгляді?",
+ radYes: "Так",
+ radNo: "Ні",
+ qHousehold: "Скільки людей у вашій родині?",
+ qCoverage: "Кому потрібне страхування?",
+ covMe: "Тільки мені",
+ covAll: "Всім у родині",
+ covSome: "Лише деяким членам родини",
+ lblName: "Повне ім'я",
+ lblPhone: "Номер телефону",
+ lblEmail: "Електронна пошта",
+ lblDob: "Дата народження",
+ lblAddress: "Адреса",
+ submit: "Надіслати запит"
+ }
+ };
+
+ function changeLanguage() {
+ const lang = document.getElementById('langSwitch').value;
+ const t = translations[lang];
+
+ document.getElementById('t-title').innerText = t.title;
+ document.getElementById('t-free').innerText = t.free;
+ document.getElementById('t-service1').innerText = t.service1;
+ document.getElementById('t-service2').innerText = t.service2;
+ document.getElementById('t-service3').innerText = t.service3;
+ document.getElementById('t-contact-title').innerText = t.contactTitle;
+ 
+ if(document.getElementById('btn-phone').dataset.revealed !== 'true') {
+ document.getElementById('t-reveal-phone').innerText = t.revealPhone;
+ }
+ if(document.getElementById('btn-email').dataset.revealed !== 'true') {
+ document.getElementById('t-reveal-email').innerText = t.revealEmail;
+ }
+
+ document.getElementById('t-form-title').innerText = t.formTitle;
+ document.getElementById('t-form-note').innerText = t.formNote;
+ document.getElementById('t-q-account').innerText = t.qAccount;
+ document.getElementById('t-opt-yes').innerText = t.optYes;
+ document.getElementById('t-opt-no').innerText = t.optNo;
+ document.getElementById('t-opt-help').innerText = t.optHelp;
+ document.getElementById('t-q-pending').innerText = t.qPending;
+ document.getElementById('t-rad-yes').innerText = t.radYes;
+ document.getElementById('t-rad-no').innerText = t.radNo;
+ document.getElementById('t-q-household').innerText = t.qHousehold;
+ document.getElementById('t-q-coverage').innerText = t.qCoverage;
+ document.getElementById('t-cov-me').innerText = t.covMe;
+ document.getElementById('t-cov-all').innerText = t.covAll;
+ document.getElementById('t-cov-some').innerText = t.covSome;
+ document.getElementById('t-lbl-name').innerText = t.lblName;
+ document.getElementById('t-lbl-phone').innerText = t.lblPhone;
+ document.getElementById('t-lbl-email').innerText = t.lblEmail;
+ document.getElementById('t-lbl-dob').innerText = t.lblDob;
+ document.getElementById('t-lbl-address').innerText = t.lblAddress;
+ document.getElementById('t-submit').innerText = t.submit;
+ }
+
+ function revealContact(type) {
+ if (type === 'phone') {
+ const btn = document.getElementById('btn-phone');
+ btn.innerHTML = '<a href="sms:+15078587188" style="color:white; text-decoration:none;">Text: +1 (507) 858-7188</a>';
+ btn.dataset.revealed = 'true';
+ } else if (type === 'email') {
+ const btn = document.getElementById('btn-email');
+ btn.innerHTML = '<a href="mailto:navigator@minnesotasure.org" style="color:white; text-decoration:none;">navigator@minnesotasure.org</a>';
+ btn.dataset.revealed = 'true';
+ }
+ }
+ </script>
+</body>
+</html>
